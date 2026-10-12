@@ -1,0 +1,43 @@
+# Verification only: no deployment or repository write permissions.
+# GitHub Pages keeps publishing main / (root) through its own pages-build-deployment run.
+name: Verify documentation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 * * 1'
+permissions:
+  contents: read
+jobs:
+  verify:
+    name: Build, tests and internal link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      # Tests, provenance hashes, regeneration, and every local link/asset/fragment at / and /autheo-dev-docs/.
+      - run: npm run check
+      - run: node scripts/provenance.mjs
+      # Generated HTML and search index must be committed together with their Markdown source.
+      - run: git diff --exit-code
+  external-links:
+    name: External link check
+    runs-on: ubuntu-latest
+    # Advisory on pushes/PRs (third-party sites flap); authoritative on the weekly schedule.
+    continue-on-error: ${{ github.event_name != 'schedule' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - run: node scripts/check-links.mjs
