@@ -1,0 +1,1051 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "https://github.com/autheo-os/autheo-MCP",
+    "commit": "663416577abbd4ef5b7bb2d85448e70bb1a828f5",
+    "committed": "2026-10-12T17:47:44-06:00",
+    "version": "0.3.0a1",
+    "method": "FastMCP tools/list and resources/list introspection of autheo_mcp.server"
+  },
+  "counts": {
+    "tools": 44,
+    "resources": 5
+  },
+  "tools": [
+    {
+      "name": "autheo_agent_get_mandate",
+      "description": "Inspect scoped mandate and DEMO budget summary; no real wallet funds or approvals.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_agent_get_mandateArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_agent_get_passport",
+      "description": "Read the configured agent's issuer-asserted identity, not a proof of legal ownership.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_agent_get_passportArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_agent_list_receipts",
+      "description": "Read up to 20 signed-snapshot receipt summaries; not an independent action/chain proof.",
+      "inputSchema": {
+        "properties": {
+          "limit": {
+            "default": 20,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "autheo_agent_list_receiptsArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_agent_trust_guide",
+      "description": "Explain agent trust setup and boundaries. Does not issue identity, authority, or wallet access.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_agent_trust_guideArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_agent_trust_status",
+      "description": "Inspect a pinned-issuer signed snapshot and audit summary. Never grants execution authority.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_agent_trust_statusArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_compute_quote",
+      "description": "Generate a simulated compute quote.\n\nThis function MUST NOT create an order or move THEO.",
+      "inputSchema": {
+        "properties": {
+          "cpu": {
+            "title": "Cpu",
+            "type": "integer"
+          },
+          "ram_gb": {
+            "title": "Ram Gb",
+            "type": "integer"
+          },
+          "duration_hours": {
+            "title": "Duration Hours",
+            "type": "number"
+          },
+          "storage_gb": {
+            "default": 0,
+            "title": "Storage Gb",
+            "type": "integer"
+          },
+          "gpu": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Gpu"
+          },
+          "gpu_count": {
+            "default": 0,
+            "title": "Gpu Count",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "cpu",
+          "ram_gb",
+          "duration_hours"
+        ],
+        "title": "autheo_compute_quoteArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_compute_search",
+      "description": "Search reported DevHub hardware, NOT reservable marketplace listings. Use autheo_marketplace_list_listings for purchasable inventory.\n\nPrices are expressed in THEO. USD conversion should be performed\nseparately through the Autheo oracle.",
+      "inputSchema": {
+        "properties": {
+          "cpu": {
+            "title": "Cpu",
+            "type": "integer"
+          },
+          "ram_gb": {
+            "title": "Ram Gb",
+            "type": "integer"
+          },
+          "storage_gb": {
+            "default": 0,
+            "title": "Storage Gb",
+            "type": "integer"
+          },
+          "gpu": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Gpu"
+          },
+          "gpu_count": {
+            "default": 0,
+            "title": "Gpu Count",
+            "type": "integer"
+          },
+          "max_price_theo_hour": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Max Price Theo Hour"
+          },
+          "min_reputation": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Min Reputation"
+          }
+        },
+        "required": [
+          "cpu",
+          "ram_gb"
+        ],
+        "title": "autheo_compute_searchArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_convert_theo_to_usd",
+      "description": "Convert a THEO amount into its USD reference value using the\nAutheo oracle.\n\nThis does not execute a trade.",
+      "inputSchema": {
+        "properties": {
+          "amount_theo": {
+            "title": "Amount Theo",
+            "type": "number"
+          }
+        },
+        "required": [
+          "amount_theo"
+        ],
+        "title": "autheo_convert_theo_to_usdArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_convert_usd_to_theo",
+      "description": "Convert a USD reference amount into THEO using the Autheo oracle.\n\nThis is an informational conversion and does not execute a trade.",
+      "inputSchema": {
+        "properties": {
+          "amount_usd": {
+            "title": "Amount Usd",
+            "type": "number"
+          }
+        },
+        "required": [
+          "amount_usd"
+        ],
+        "title": "autheo_convert_usd_to_theoArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_get_build",
+      "description": "Read DevHub build state and evidence from the real /v1/builds/{id} route.",
+      "inputSchema": {
+        "properties": {
+          "build_id": {
+            "title": "Build Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "build_id"
+        ],
+        "title": "autheo_devhub_get_buildArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_get_build_logs",
+      "description": "Read the last 1–2000 build log lines; never executes a build.",
+      "inputSchema": {
+        "properties": {
+          "build_id": {
+            "title": "Build Id",
+            "type": "string"
+          },
+          "tail": {
+            "default": 200,
+            "title": "Tail",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "build_id"
+        ],
+        "title": "autheo_devhub_get_build_logsArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_get_deployment",
+      "description": "Find a deployment in the team-scoped /deployments response.",
+      "inputSchema": {
+        "properties": {
+          "deployment_id": {
+            "title": "Deployment Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "deployment_id"
+        ],
+        "title": "autheo_devhub_get_deploymentArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_get_deployment_resources",
+      "description": "Read actual deployment resources from DevHub.",
+      "inputSchema": {
+        "properties": {
+          "deployment_id": {
+            "title": "Deployment Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "deployment_id"
+        ],
+        "title": "autheo_devhub_get_deployment_resourcesArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_get_job",
+      "description": "Retrieve an Autheo DevHub workload/job.",
+      "inputSchema": {
+        "properties": {
+          "job_id": {
+            "title": "Job Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "job_id"
+        ],
+        "title": "autheo_devhub_get_jobArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_get_project",
+      "description": "Retrieve an Autheo DevHub project.",
+      "inputSchema": {
+        "properties": {
+          "project_id": {
+            "title": "Project Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "project_id"
+        ],
+        "title": "autheo_devhub_get_projectArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_list_deployments",
+      "description": "Read deployments visible to the configured DevHub team.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_devhub_list_deploymentsArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_list_nodes",
+      "description": "Read and normalize DevHub nodes; hardware totals do not imply available marketplace capacity.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_devhub_list_nodesArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_list_projects",
+      "description": "List project names derived from visible deployments; undeployed projects are not included.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_devhub_list_projectsArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_search",
+      "description": "Search deployment-backed DevHub projects and deployments (not a complete project inventory).",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "autheo_devhub_searchArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_devhub_status",
+      "description": "Read overview, cluster, mesh, security, or wallet metadata; process liveness is not mesh health.",
+      "inputSchema": {
+        "properties": {
+          "view": {
+            "default": "overview",
+            "title": "View",
+            "type": "string"
+          }
+        },
+        "title": "autheo_devhub_statusArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_account",
+      "description": "Retrieve basic information about an Autheo account.",
+      "inputSchema": {
+        "properties": {
+          "address": {
+            "title": "Address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "title": "autheo_get_accountArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_balance",
+      "description": "Retrieve the native THEO balance for an Autheo address.",
+      "inputSchema": {
+        "properties": {
+          "address": {
+            "title": "Address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "title": "autheo_get_balanceArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_block",
+      "description": "Retrieve an Autheo block by height.",
+      "inputSchema": {
+        "properties": {
+          "height": {
+            "title": "Height",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "height"
+        ],
+        "title": "autheo_get_blockArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_integration_guide",
+      "description": "Local integration map and prerequisites; does not claim a live backend connection.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_get_integration_guideArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_latest_block",
+      "description": "Get the latest Autheo blockchain block.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_get_latest_blockArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_network_status",
+      "description": "Get the current status of the Autheo network.\n\nQueries the configured CometBFT RPC endpoint and DevHub health endpoint.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_get_network_statusArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_order",
+      "description": "Retrieve an Autheo marketplace order.\n\nReads the authenticated Marketplace order. A marketplace order is not a DevHub deployment.",
+      "inputSchema": {
+        "properties": {
+          "order_id": {
+            "title": "Order Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "order_id"
+        ],
+        "title": "autheo_get_orderArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_provider",
+      "description": "Retrieve information about an Autheo marketplace provider.\n\nProviders are represented by DevHub nodes in the L0 deployment.",
+      "inputSchema": {
+        "properties": {
+          "provider_id": {
+            "title": "Provider Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "provider_id"
+        ],
+        "title": "autheo_get_providerArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_provider_reputation",
+      "description": "Retrieve the reputation information for an Autheo provider.\n\nCurrently sourced from DevHub node capacity metadata.",
+      "inputSchema": {
+        "properties": {
+          "provider_id": {
+            "title": "Provider Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "provider_id"
+        ],
+        "title": "autheo_get_provider_reputationArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_server_info",
+      "description": "Return information about the Autheo MCP server.\n\nThis is a local MCP capability check and does not query the blockchain.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_get_server_infoArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_theo_price",
+      "description": "Return display-only THEO/USD data with freshness status; not settlement authority.\n\nThis tool is intentionally separated from marketplace pricing.\nMarketplace prices should be denominated in THEO while this oracle\nprovides the external USD reference value.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_get_theo_priceArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_get_transaction",
+      "description": "Retrieve an Autheo transaction by transaction hash.",
+      "inputSchema": {
+        "properties": {
+          "tx_hash": {
+            "title": "Tx Hash",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tx_hash"
+        ],
+        "title": "autheo_get_transactionArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_categories",
+      "description": "Return the major Autheo marketplace resource categories.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_marketplace_categoriesArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_estimate_listing",
+      "description": "Local exact-decimal estimate from current listing price; NOT an authoritative checkout quote/reservation.",
+      "inputSchema": {
+        "properties": {
+          "listing_id": {
+            "title": "Listing Id",
+            "type": "string"
+          },
+          "quantity": {
+            "default": 1,
+            "title": "Quantity",
+            "type": "integer"
+          },
+          "duration": {
+            "default": 1,
+            "title": "Duration",
+            "type": "integer"
+          },
+          "duration_unit": {
+            "default": "hour",
+            "title": "Duration Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "listing_id"
+        ],
+        "title": "autheo_marketplace_estimate_listingArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_get_capacity",
+      "description": "Read public capacity projection; does not expose the private mesh advertisement API.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_marketplace_get_capacityArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_get_listing",
+      "description": "Get live listing detail, constraints and canonical decimal-string price.",
+      "inputSchema": {
+        "properties": {
+          "listing_id": {
+            "title": "Listing Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "listing_id"
+        ],
+        "title": "autheo_marketplace_get_listingArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_get_placement_policy",
+      "description": "Read an order's placement constraints; never schedule or mutate the policy.",
+      "inputSchema": {
+        "properties": {
+          "order_id": {
+            "title": "Order Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "order_id"
+        ],
+        "title": "autheo_marketplace_get_placement_policyArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_get_settlement_status",
+      "description": "Read recorded settlement status. Does NOT verify payments or trigger allocation.",
+      "inputSchema": {
+        "properties": {
+          "order_id": {
+            "title": "Order Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "order_id"
+        ],
+        "title": "autheo_marketplace_get_settlement_statusArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_list_l0_deployments",
+      "description": "Private HMAC/mTLS service read of short-lived L0 advertisements. Not public listing inventory.",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_marketplace_list_l0_deploymentsArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_list_listings",
+      "description": "Browse purchasable Marketplace listings; preserves exact THEO strings and upstream page metadata.",
+      "inputSchema": {
+        "properties": {
+          "resource_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Resource Type"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Region"
+          },
+          "limit": {
+            "default": 25,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "title": "autheo_marketplace_list_listingsArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_list_orders",
+      "description": "List orders for the configured Clerk session's buyer tenant (upstream limit 100).",
+      "inputSchema": {
+        "properties": {},
+        "title": "autheo_marketplace_list_ordersArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_marketplace_provider_view",
+      "description": "Read own provider profile, listings, node_bindings, orders, or infrastructure_rewards; Clerk role/tenant enforced upstream.",
+      "inputSchema": {
+        "properties": {
+          "view": {
+            "default": "profile",
+            "title": "View",
+            "type": "string"
+          }
+        },
+        "title": "autheo_marketplace_provider_viewArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_storage_quote",
+      "description": "Generate a simulated storage quote.\n\nThis function MUST NOT create a storage contract or transfer THEO.",
+      "inputSchema": {
+        "properties": {
+          "storage_gb": {
+            "title": "Storage Gb",
+            "type": "integer"
+          },
+          "duration_days": {
+            "title": "Duration Days",
+            "type": "integer"
+          },
+          "replication_factor": {
+            "default": 1,
+            "title": "Replication Factor",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "storage_gb",
+          "duration_days"
+        ],
+        "title": "autheo_storage_quoteArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    },
+    {
+      "name": "autheo_storage_search",
+      "description": "Search reported DevHub storage hardware, NOT reservable marketplace listings.",
+      "inputSchema": {
+        "properties": {
+          "storage_gb": {
+            "title": "Storage Gb",
+            "type": "integer"
+          },
+          "duration_days": {
+            "title": "Duration Days",
+            "type": "integer"
+          },
+          "replication_factor": {
+            "default": 1,
+            "title": "Replication Factor",
+            "type": "integer"
+          },
+          "max_price_theo_month": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Max Price Theo Month"
+          },
+          "min_reputation": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Min Reputation"
+          }
+        },
+        "required": [
+          "storage_gb",
+          "duration_days"
+        ],
+        "title": "autheo_storage_searchArguments",
+        "type": "object"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "autheo://agent-trust",
+      "name": "autheo_agent_trust_resource",
+      "description": "Local documentation of the external agent environment's trust boundary.",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "autheo://capabilities",
+      "name": "autheo_capabilities_resource",
+      "description": "Describe the capabilities exposed by this MCP server.",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "autheo://integrations",
+      "name": "autheo_integrations_resource",
+      "description": "Pinned integration contracts and setup boundaries.",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "autheo://marketplace",
+      "name": "autheo_marketplace_resource",
+      "description": "Description of the Autheo marketplace.",
+      "mimeType": "text/plain"
+    },
+    {
+      "uri": "autheo://network",
+      "name": "autheo_network_resource",
+      "description": "Basic Autheo network information.",
+      "mimeType": "text/plain"
+    }
+  ]
+}
