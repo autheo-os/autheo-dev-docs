@@ -26,7 +26,7 @@ Open the printed loopback URL. The preview serves only allowlisted static files.
 
 ## Edit and verify
 
-Markdown lives in `site/`; `publication.json` lists exactly 23 approved pages. After editing:
+Markdown lives in `site/`; `publication.json` lists every published page (42 on 2026-10-12; the 23 originally reviewed pages keep their source hashes). After editing:
 
 ~~~sh
 npm ci --ignore-scripts
