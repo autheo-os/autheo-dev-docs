@@ -27,9 +27,9 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
       regeneration diff; advisory external link check `scripts/check-links.mjs`).
 - [x] 2. Gap audit: `docs/implementation/gap-audit.md`.
 - [ ] 3. Status page: `reference/live-status.md` (dev.autheo.com live vs planned, dated probes).
-- [~] 4. MCP (pages done; CI drift job pending): generator `scripts/gen-mcp-reference.mjs` → `site/mcp/tools.md` + `data/mcp-tools.json`;
+- [x] 4. MCP: generator `scripts/gen-mcp-reference.mjs` → `site/mcp/tools.md` + `data/mcp-tools.json`;
       `site/mcp/index.md` (install/config for Claude Desktop, Claude Code, OpenClaw, generic stdio); CI drift job.
-- [ ] 5. DevHub (Layer 0): concept page, deploy guide, REST reference generated from `ui/lib/api-catalog.ts`
+- [x] 5. DevHub (Layer 0) (overview + generated REST/CLI reference; source is ThothDivision fork, newer than autheo-os): concept page, deploy guide, REST reference generated from `ui/lib/api-catalog.ts`
       cross-checked against `crates/hive-cloud` routes, CLI reference (`shadw`, `hivectl`, `fluidctl`, `hive-cloud`).
 - [ ] 6. Identity / agent trust: concept (did:key, delegation, revocation), guide (CLI walkthrough), API reference.
 - [ ] 7. AOS stack concept (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
@@ -40,3 +40,4 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 
 - 2026-10-12: steps 0–2 committed.
 - 2026-10-12 18:xx: step 4 MCP pages (mcp/index.md install/config/clients, generated mcp/tools.md from autheo-MCP@6634165; 44 tools, 5 resources) published; 25 pages, tests 14/14.
+- 2026-10-12: step 5 DevHub pages (devhub/index.md, generated devhub/api.md: 34 endpoints, 14 shadw commands); CI drift checks for both generators. 27 pages.

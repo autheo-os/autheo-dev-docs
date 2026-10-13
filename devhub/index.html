@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>DevHub (Layer 0) · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Ecosystem components</h2><ul><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>Guides</h2><ul><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>DevHub (Layer 0)</h2><ul><li><a aria-current="page" href="index.html">DevHub (Layer 0)</a></li><li><a href="api.html">DevHub API and CLI reference</a></li></ul></section><section class="nav-group"><h2>MCP server</h2><ul><li><a href="../mcp/index.html">Autheo MCP server</a></li><li><a href="../mcp/tools.html">MCP tool reference</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 27 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="devhub-layer-0">DevHub (Layer 0)</h1>
+<p>DevHub, published at <a href="https://dev.autheo.com">dev.autheo.com</a>, is Autheo's developer cloud: Git deployments, serverless functions, containers, static sites, databases, cron jobs, workflows, domains, logs and game servers, run on a peer-to-peer compute fabric instead of a single cloud region. Its code is the <code>L0_devhub_deploy</code> repository; the internal product name in code and CLI is <strong>shadw</strong>, and the node software is called <strong>Hive</strong>.</p>
+<p>This page covers what is implemented and how to use it. The generated <a href="./api.html">DevHub API and CLI reference</a> lists every endpoint and command.</p>
+<p>::: info Which repository
+The actively developed copy is <a href="https://github.com/ThothDivision/L0_devhub_deploy">ThothDivision/L0_devhub_deploy</a> (commit <code>29abc9f</code>, 2026-10-12). <a href="https://github.com/autheo-os/L0_devhub_deploy">autheo-os/L0_devhub_deploy</a> was last updated 2026-10-08 (<code>405075e</code>). Facts below come from the newer copy.
+:::</p>
+<h2 id="how-it-is-built">How it is built</h2>
+<p>The repository README describes these layers, top to bottom:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Developer experience</td>
+<td>CLI, SDKs, Git, dashboard, APIs, templates, docs</td>
+</tr>
+<tr>
+<td>Application runtime</td>
+<td>Functions, containers, static apps, services, AI</td>
+</tr>
+<tr>
+<td>Distributed compute</td>
+<td>"Fluid compute", warm pools, autoscaling, microVMs</td>
+</tr>
+<tr>
+<td>Compute fabric</td>
+<td>Cloud, edge, private, community and mobile/IoT nodes</td>
+</tr>
+<tr>
+<td>Data fabric</td>
+<td>CRDTs, local state, replication, storage, databases</td>
+</tr>
+<tr>
+<td>Network fabric</td>
+<td>Iroh/QUIC peer-to-peer, relays, DNS, anycast, edge routing</td>
+</tr>
+<tr>
+<td>Identity and trust</td>
+<td>Node identity, encryption, veritas reputation, attestation</td>
+</tr>
+<tr>
+<td>Resource marketplace</td>
+<td>Compute, storage, bandwidth, hosting priced in THEO</td>
+</tr>
+<tr>
+<td>Autheo network</td>
+<td>Cosmos SDK, IBC, EVM, CometBFT</td>
+</tr>
+</tbody>
+</table>
+<p>In code these map to Rust crates such as <code>hive-cloud</code> (the node and its admin REST API), <code>hive-p2p</code>, <code>hive-edge</code>, <code>hive-crsql</code> (CRDT SQLite), <code>fluid-compute</code>, <code>fluid-gateway</code>, and the CLIs <code>shadw-cli</code>, <code>hivectl</code> and <code>fluidctl</code>; the dashboard is the Next.js app in <code>ui/</code>.</p>
+<aside class="notice"><p class="notice-title">Design direction vs shipped</p>
+<p>Post-quantum key agreement, hardware attestation, veritas reputation and on-chain settlement are described in the README as design direction. Marketplace ↔ DevHub integration has four private HMAC routes implemented; capacity holds, allocation status, usage ingestion and callbacks are documented in <code>docs/openapi/README.md</code> but <strong>not implemented</strong>.</p>
+</aside>
+<h2 id="what-is-live-today">What is live today</h2>
+<p>Checked anonymously on 2026-10-12:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Surface</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://dev.autheo.com/</code> and marketing/docs pages (<code>/docs</code>, <code>/features</code>, <code>/pricing</code>, <code>/status</code>, <code>/blog</code> …)</td>
+<td>Served (HTTP 200)</td>
+</tr>
+<tr>
+<td>Dashboard routes (<code>/projects</code>, <code>/deployments</code>, <code>/new</code>, <code>/settings/api-keys</code>, <code>/run-node</code> …)</td>
+<td>Redirect to <code>/sign-in</code>; an account is required</td>
+</tr>
+<tr>
+<td><code>/api</code>, <code>/api/market/theo</code> on dev.autheo.com</td>
+<td>404</td>
+</tr>
+<tr>
+<td><code>https://api.shadw.cloud/healthz</code> (base URL in the dashboard's API reference)</td>
+<td>Returned <code>ok</code></td>
+</tr>
+<tr>
+<td><code>https://api.autheo.dev</code> (named on the live getting-started page)</td>
+<td>Did not resolve (DNS)</td>
+</tr>
+</tbody>
+</table>
+<p>So today you use DevHub through the signed-in dashboard, or through the API/CLI with an API key created in the dashboard. See <a href="../reference/status.html">Status</a> for the wider evidence matrix.</p>
+<h2 id="authentication">Authentication</h2>
+<p>Every API request carries <code>Authorization: Bearer &lt;key&gt;</code>, which scopes it to your team. Create keys under <strong>Settings → API keys</strong> in the dashboard, or with <code>POST /v1/apikeys</code> once you hold a key. Dashboard sign-in uses Clerk.</p>
+<h2 id="deploy-with-the-cli">Deploy with the CLI</h2>
+<p>The CLI in the repository is <code>shadw</code> (built from <code>crates/shadw-cli</code>; the README's <code>autheo login / deploy</code> examples describe an intended CLI name that does not exist yet).</p>
+<pre tabindex="0"><code class="language-bash"># configure once (writes ~/.shadw/config.json), or export the variables below
+shadw auth
+export SHADW_API_URL=https://api.shadw.cloud   # default: http://127.0.0.1:8786 (local node)
+export SHADW_TOKEN=&lt;api key&gt;
+export SHADW_TEAM=&lt;team slug&gt;                  # optional
+
+shadw deploy                 # clone → build → deploy a Git repository
+shadw build                  # build status and streamed logs
+shadw deployments            # list, promote (rollback), delete
+shadw projects               # settings, env vars, redeploy, domains
+shadw observability          # overview, logs, resources, metrics, regions, nodes
+shadw api                    # call any endpoint directly
+</code></pre>
+<p>Run <code>shadw &lt;command&gt; --help</code> for flags. The full command list is in the <a href="./api.html#shadw-cli-commands">reference</a>.</p>
+<h2 id="deploy-with-the-api">Deploy with the API</h2>
+<p>The core flow uses four endpoints from the <a href="./api.html">reference</a>:</p>
+<ol>
+<li><code>POST /v1/git/deploy</code> starts a build from a Git repository.</li>
+<li><code>GET /v1/builds/{id}</code> polls build status and logs.</li>
+<li><code>POST /v1/deployments/{id}/promote</code> makes a deployment live (also used to roll back).</li>
+<li><code>POST /v1/projects/{project}/env</code> and <code>POST /v1/projects/{project}/domains</code> configure environment variables and domains.</li>
+</ol>
+<h2 id="game-servers">Game servers</h2>
+<p>DevHub ships game server presets (for example Team Fortress 2, Don't Starve Together and GoldenEye: Source) with a guided setup in the dashboard. Each preset pins an upstream container image; see <code>docs/game-server-presets.md</code> in the repository.</p>
+<h2 id="run-a-node">Run a node</h2>
+<p>Operators can contribute compute by running a Hive node. The dashboard's <strong>Run a node</strong> page (signed in) walks through it; the general model is in the <a href="../guides/node-operator.html">node operator guide</a>. The repository's <code>RUNBOOK.md</code> and <code>docs/LIVE_INFRA_RUNBOOK.md</code> cover self-hosting.</p>
+<h2 id="use-devhub-from-an-ai-agent">Use DevHub from an AI agent</h2>
+<p>The <a href="../mcp/index.html">Autheo MCP server</a> exposes read-only DevHub tools (deployments, builds and logs, nodes, cluster and mesh status) when you set <code>AUTHEO_DEVHUB_URL</code> and a DevHub key.</p>
+<h2 id="licence">Licence</h2>
+<p>DevHub's <code>LICENSE.md</code> is restrictive (an "Open BSL"-style licence, per the repository description); it is not MIT.</p>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="../guides/provider-design.html">← Provider preparation</a><a rel="next" href="api.html">DevHub API and CLI reference →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#how-it-is-built">How it is built</a></li><li><a href="#what-is-live-today">What is live today</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#deploy-with-the-cli">Deploy with the CLI</a></li><li><a href="#deploy-with-the-api">Deploy with the API</a></li><li><a href="#game-servers">Game servers</a></li><li><a href="#run-a-node">Run a node</a></li><li><a href="#use-devhub-from-an-ai-agent">Use DevHub from an AI agent</a></li><li><a href="#licence">Licence</a></li></ul></aside></div></body></html>

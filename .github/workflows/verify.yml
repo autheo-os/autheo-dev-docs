@@ -26,6 +26,8 @@ jobs:
       # Tests, provenance hashes, regeneration, and every local link/asset/fragment at / and /autheo-dev-docs/.
       - run: npm run check
       - run: node scripts/provenance.mjs
+      - run: node scripts/gen-mcp-reference.mjs --check
+      - run: node scripts/gen-devhub-reference.mjs --check
       # Generated HTML and search index must be committed together with their Markdown source.
       - run: git diff --exit-code
   external-links:

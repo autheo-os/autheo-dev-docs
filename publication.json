@@ -84,6 +84,19 @@
       ]
     },
     {
+      "title": "DevHub (Layer 0)",
+      "pages": [
+        {
+          "file": "devhub/index.md",
+          "title": "DevHub (Layer 0)"
+        },
+        {
+          "file": "devhub/api.md",
+          "title": "DevHub API and CLI reference"
+        }
+      ]
+    },
+    {
       "title": "MCP server",
       "pages": [
         {

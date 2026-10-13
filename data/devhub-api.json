@@ -1,0 +1,795 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "https://github.com/ThothDivision/L0_devhub_deploy",
+    "commit": "29abc9f68731963039a2fbfc3371f0237c93d39e",
+    "committed": "2026-10-12T10:18:55-06:00",
+    "files": [
+      "ui/lib/api-catalog.ts",
+      "crates/shadw-cli/src/main.rs"
+    ]
+  },
+  "apiBase": "https://api.shadw.cloud",
+  "categories": [
+    {
+      "slug": "deployments",
+      "name": "Deployments",
+      "endpoints": [
+        {
+          "name": "Create a deployment",
+          "method": "POST",
+          "path": "/v1/git/deploy",
+          "summary": "Clone, build and deploy a Git repository. Returns a build id you can stream logs from. The branch (vs the project's production branch) decides production vs preview.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "repo_url",
+              "type": "string",
+              "required": true,
+              "desc": "Git repository URL to clone and build."
+            },
+            {
+              "name": "branch",
+              "type": "string",
+              "desc": "Branch to deploy (defaults to the repo's default branch)."
+            },
+            {
+              "name": "project",
+              "type": "string",
+              "desc": "Project name (auto-generated when omitted)."
+            },
+            {
+              "name": "root_dir",
+              "type": "string",
+              "desc": "Subdirectory to build, for monorepos."
+            },
+            {
+              "name": "target",
+              "type": "\"production\" | \"preview\"",
+              "desc": "Force the environment; omit to classify by branch."
+            },
+            {
+              "name": "use_cache",
+              "type": "boolean",
+              "desc": "Reuse the dependency build cache (default true)."
+            }
+          ]
+        },
+        {
+          "name": "Get a build",
+          "method": "GET",
+          "path": "/v1/builds/{id}",
+          "summary": "Poll a build's status and streamed logs. State is one of building, ready or error.",
+          "pathParams": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The build id returned by Create a deployment."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Promote a deployment",
+          "method": "POST",
+          "path": "/v1/deployments/{id}/promote",
+          "summary": "Promote (or roll back to) a deployment — instantly re-points the production alias to it. No rebuild.",
+          "pathParams": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The deployment id to promote."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Redeploy a project",
+          "method": "POST",
+          "path": "/v1/projects/{project}/redeploy",
+          "summary": "Rebuild a project's latest source with the current project settings.",
+          "pathParams": [
+            {
+              "name": "project",
+              "type": "string",
+              "required": true,
+              "desc": "The project name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "target",
+              "type": "\"production\" | \"preview\"",
+              "desc": "Environment for the new deployment."
+            },
+            {
+              "name": "use_cache",
+              "type": "boolean",
+              "desc": "Reuse the existing build cache (default true)."
+            }
+          ]
+        },
+        {
+          "name": "Delete a deployment",
+          "method": "DELETE",
+          "path": "/v1/deployments/{id}",
+          "summary": "Delete a single deployment and unregister its functions.",
+          "pathParams": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The deployment id to delete."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    },
+    {
+      "slug": "projects",
+      "name": "Projects",
+      "endpoints": [
+        {
+          "name": "Get project settings",
+          "method": "GET",
+          "path": "/v1/projects/{project}/settings",
+          "summary": "Read a project's settings (build config, env, domains, production branch, preview protection).",
+          "pathParams": [
+            {
+              "name": "project",
+              "type": "string",
+              "required": true,
+              "desc": "The project name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Set an environment variable",
+          "method": "POST",
+          "path": "/v1/projects/{project}/env",
+          "summary": "Add or update an environment variable. Sensitive values are encrypted at rest (ChaCha20-Poly1305).",
+          "pathParams": [
+            {
+              "name": "project",
+              "type": "string",
+              "required": true,
+              "desc": "The project name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": true,
+              "desc": "Variable name."
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "desc": "Value (sealed at rest when sensitive)."
+            },
+            {
+              "name": "target",
+              "type": "\"production\" | \"preview\" | \"all\"",
+              "desc": "Which environments it applies to."
+            },
+            {
+              "name": "sensitive",
+              "type": "boolean",
+              "desc": "Encrypt at rest and mask in the UI."
+            }
+          ]
+        },
+        {
+          "name": "Delete an environment variable",
+          "method": "DELETE",
+          "path": "/v1/projects/{project}/env/{key}",
+          "summary": "Remove an environment variable from a project.",
+          "pathParams": [
+            {
+              "name": "project",
+              "type": "string",
+              "required": true,
+              "desc": "The project name."
+            },
+            {
+              "name": "key",
+              "type": "string",
+              "required": true,
+              "desc": "The variable name to delete."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Delete a project",
+          "method": "DELETE",
+          "path": "/v1/projects/{project}",
+          "summary": "Delete a project and all of its deployments.",
+          "pathParams": [
+            {
+              "name": "project",
+              "type": "string",
+              "required": true,
+              "desc": "The project name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    },
+    {
+      "slug": "domains",
+      "name": "Domains",
+      "endpoints": [
+        {
+          "name": "List domains",
+          "method": "GET",
+          "path": "/v1/domains",
+          "summary": "List the custom domains for the active team.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Attach a domain to a project",
+          "method": "POST",
+          "path": "/v1/projects/{project}/domains",
+          "summary": "Attach a custom domain to a project. The domain's root label is aliased to the project's current deployment.",
+          "pathParams": [
+            {
+              "name": "project",
+              "type": "string",
+              "required": true,
+              "desc": "The project name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The fully-qualified domain to attach."
+            }
+          ]
+        },
+        {
+          "name": "Get a domain",
+          "method": "GET",
+          "path": "/v1/domains/{domain}",
+          "summary": "Get a domain with its DNS records, nameservers, SSL certificate and connected projects.",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Set nameservers",
+          "method": "PUT",
+          "path": "/v1/domains/{domain}/nameservers",
+          "summary": "Set the domain's nameservers (when delegating the whole zone to shadw).",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "nameservers",
+              "type": "string[]",
+              "required": true,
+              "desc": "Nameservers to delegate the zone to."
+            }
+          ]
+        },
+        {
+          "name": "Renew the SSL certificate",
+          "method": "POST",
+          "path": "/v1/domains/{domain}/ssl/renew",
+          "summary": "Reissue the free managed (Let's Encrypt-style) certificate for the domain.",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    },
+    {
+      "slug": "dns",
+      "name": "DNS",
+      "endpoints": [
+        {
+          "name": "Create a DNS record",
+          "method": "POST",
+          "path": "/v1/domains/{domain}/records",
+          "summary": "Create a DNS record. shadw's authoritative DNS server answers queries for the domain from these records.",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "type",
+              "type": "\"A\" | \"AAAA\" | \"CNAME\" | \"TXT\" | \"MX\" | \"NS\"",
+              "required": true,
+              "desc": "Record type."
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true,
+              "desc": "Subdomain (e.g. \"www\") or \"@\" for the apex."
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "desc": "Record value (IP, hostname, text…)."
+            },
+            {
+              "name": "ttl",
+              "type": "number",
+              "desc": "Time-to-live in seconds (default 3600)."
+            },
+            {
+              "name": "priority",
+              "type": "number",
+              "desc": "Priority (MX records)."
+            }
+          ]
+        },
+        {
+          "name": "Update a DNS record",
+          "method": "PUT",
+          "path": "/v1/domains/{domain}/records/{id}",
+          "summary": "Edit an existing DNS record (system-managed records are immutable).",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            },
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The record id."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "type",
+              "type": "string",
+              "required": true,
+              "desc": "Record type."
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true,
+              "desc": "Subdomain or @ for the apex."
+            },
+            {
+              "name": "value",
+              "type": "string",
+              "required": true,
+              "desc": "Record value."
+            },
+            {
+              "name": "ttl",
+              "type": "number",
+              "desc": "Time-to-live in seconds."
+            }
+          ]
+        },
+        {
+          "name": "Delete a DNS record",
+          "method": "DELETE",
+          "path": "/v1/domains/{domain}/records/{id}",
+          "summary": "Delete a DNS record.",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            },
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The record id."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Import DNS records",
+          "method": "POST",
+          "path": "/v1/domains/{domain}/import",
+          "summary": "Bulk-import records (DNS migration) from a list and/or a pasted BIND zone file. Idempotent — exact duplicates are skipped.",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "records",
+              "type": "DnsRecord[]",
+              "desc": "Structured records to import."
+            },
+            {
+              "name": "zone",
+              "type": "string",
+              "desc": "Raw BIND-style zone text to parse and import."
+            }
+          ]
+        },
+        {
+          "name": "Scan existing DNS",
+          "method": "GET",
+          "path": "/v1/domains/{domain}/scan",
+          "summary": "Detect a domain's CURRENT public DNS records (via DNS-over-HTTPS) so they can be migrated into the console with one click. Records are returned, not added.",
+          "pathParams": [
+            {
+              "name": "domain",
+              "type": "string",
+              "required": true,
+              "desc": "The domain name."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    },
+    {
+      "slug": "webhooks",
+      "name": "Webhooks",
+      "endpoints": [
+        {
+          "name": "List webhooks",
+          "method": "GET",
+          "path": "/v1/webhooks",
+          "summary": "List outbound webhooks for the active team.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "List webhook events",
+          "method": "GET",
+          "path": "/v1/webhooks/events",
+          "summary": "List the event types a webhook can subscribe to.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Inbound Git webhook",
+          "method": "POST",
+          "path": "/v1/git/webhook",
+          "summary": "Inbound GitHub webhook. A push to the production branch deploys to production; any other branch or a pull request builds a preview.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Delete a webhook",
+          "method": "DELETE",
+          "path": "/v1/webhooks/{id}",
+          "summary": "Delete an outbound webhook.",
+          "pathParams": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The webhook id."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    },
+    {
+      "slug": "teams",
+      "name": "Teams",
+      "endpoints": [
+        {
+          "name": "List teams",
+          "method": "GET",
+          "path": "/v1/teams",
+          "summary": "List the teams you belong to.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Get a team",
+          "method": "GET",
+          "path": "/v1/teams/{slug}",
+          "summary": "Get a team's details, members and plan.",
+          "pathParams": [
+            {
+              "name": "slug",
+              "type": "string",
+              "required": true,
+              "desc": "The team slug."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Add a team member",
+          "method": "POST",
+          "path": "/v1/teams/{slug}/members",
+          "summary": "Invite a member to a team.",
+          "pathParams": [
+            {
+              "name": "slug",
+              "type": "string",
+              "required": true,
+              "desc": "The team slug."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "email",
+              "type": "string",
+              "required": true,
+              "desc": "The member's email."
+            },
+            {
+              "name": "role",
+              "type": "\"owner\" | \"member\"",
+              "desc": "Role to assign (default member)."
+            }
+          ]
+        },
+        {
+          "name": "Remove a team member",
+          "method": "DELETE",
+          "path": "/v1/teams/{slug}/members/{email}",
+          "summary": "Remove a member from a team.",
+          "pathParams": [
+            {
+              "name": "slug",
+              "type": "string",
+              "required": true,
+              "desc": "The team slug."
+            },
+            {
+              "name": "email",
+              "type": "string",
+              "required": true,
+              "desc": "The member's email."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    },
+    {
+      "slug": "tokens",
+      "name": "Tokens & API Keys",
+      "endpoints": [
+        {
+          "name": "Create an API key",
+          "method": "POST",
+          "path": "/v1/apikeys",
+          "summary": "Create a long-lived platform API key (hive_…) bound to the active team. The plaintext token is returned exactly once — only its SHA-256 hash is stored. Present it as `Authorization: Bearer hive_…` to scope requests to the key's team.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "name",
+              "type": "string",
+              "required": true,
+              "desc": "A label for the key (e.g. \"ci\")."
+            },
+            {
+              "name": "role",
+              "type": "\"owner\" | \"member\"",
+              "desc": "Role bound to the key (default \"member\")."
+            }
+          ]
+        },
+        {
+          "name": "List API keys",
+          "method": "GET",
+          "path": "/v1/apikeys",
+          "summary": "List the API keys for the active team. Only the display prefix is returned — the full token is shown once at creation and never stored.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Revoke an API key",
+          "method": "DELETE",
+          "path": "/v1/apikeys/{id}",
+          "summary": "Revoke an API key. Requests presenting the revoked token stop resolving immediately.",
+          "pathParams": [
+            {
+              "name": "id",
+              "type": "string",
+              "required": true,
+              "desc": "The API key id."
+            }
+          ],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Mint a token",
+          "method": "POST",
+          "path": "/v1/token",
+          "summary": "Mint a short-lived (8 h) JWT bearer token scoped to a team + role. Requires HIVE_JWT_SECRET to be configured on the node (returns 400 otherwise). When JWT auth is enforced, mutating requests must present a JWT.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": [
+            {
+              "name": "sub",
+              "type": "string",
+              "desc": "Subject / user id embedded in the token (default \"user\")."
+            },
+            {
+              "name": "tenant",
+              "type": "string",
+              "desc": "Team slug the token is scoped to (default \"default\")."
+            },
+            {
+              "name": "role",
+              "type": "\"owner\" | \"member\" | \"service\"",
+              "desc": "Role embedded in the token (default \"owner\")."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "observability",
+      "name": "Observability",
+      "endpoints": [
+        {
+          "name": "Get the overview",
+          "method": "GET",
+          "path": "/v1/overview",
+          "summary": "Platform overview: deployments, regions, request counters and WAF status.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        },
+        {
+          "name": "Get logs",
+          "method": "GET",
+          "path": "/v1/logs",
+          "summary": "Recent request + control-plane events for the active team.",
+          "pathParams": [],
+          "queryParams": [
+            {
+              "name": "limit",
+              "type": "number",
+              "desc": "Max events to return (default 100)."
+            }
+          ],
+          "bodyParams": []
+        },
+        {
+          "name": "Get cluster resources",
+          "method": "GET",
+          "path": "/v1/resources",
+          "summary": "Live cluster resource totals (CPU, memory, disk) across the mesh and this node's usage.",
+          "pathParams": [],
+          "queryParams": [],
+          "bodyParams": []
+        }
+      ]
+    }
+  ],
+  "cli": [
+    {
+      "command": "auth",
+      "summary": "Authenticate the CLI with your API key (saves ~/.shadw/config.json)."
+    },
+    {
+      "command": "deploy",
+      "summary": "Deploy a Git repository (clone → build → deploy)."
+    },
+    {
+      "command": "build",
+      "summary": "Inspect a build (status + streamed logs)."
+    },
+    {
+      "command": "deployments",
+      "summary": "Deployments — list, promote (rollback), delete, inspect."
+    },
+    {
+      "command": "projects",
+      "summary": "Projects — settings, env vars, redeploy, domains, delete."
+    },
+    {
+      "command": "domains",
+      "summary": "Domains & DNS — records, migration (scan/import), nameservers, SSL."
+    },
+    {
+      "command": "webhooks",
+      "summary": "Outbound webhooks."
+    },
+    {
+      "command": "teams",
+      "summary": "Teams & members."
+    },
+    {
+      "command": "keys",
+      "summary": "API keys."
+    },
+    {
+      "command": "databases",
+      "summary": "Databases."
+    },
+    {
+      "command": "cron",
+      "summary": "Cron jobs."
+    },
+    {
+      "command": "workflows",
+      "summary": "Workflows."
+    },
+    {
+      "command": "observability",
+      "summary": "Observability — overview, logs, resources, metrics, regions, nodes."
+    },
+    {
+      "command": "api",
+      "summary": "Generic API passthrough for any endpoint (escape hatch)."
+    }
+  ]
+}

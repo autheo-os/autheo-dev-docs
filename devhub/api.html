@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>DevHub API and CLI reference · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Ecosystem components</h2><ul><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>Guides</h2><ul><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>DevHub (Layer 0)</h2><ul><li><a href="index.html">DevHub (Layer 0)</a></li><li><a aria-current="page" href="api.html">DevHub API and CLI reference</a></li></ul></section><section class="nav-group"><h2>MCP server</h2><ul><li><a href="../mcp/index.html">Autheo MCP server</a></li><li><a href="../mcp/tools.html">MCP tool reference</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 27 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="devhub-api-and-cli-reference">DevHub API and CLI reference</h1>
+<p><strong>Generated from code — do not edit by hand.</strong> Produced by <code>scripts/gen-devhub-reference.mjs</code> from <a href="https://github.com/ThothDivision/L0_devhub_deploy">ThothDivision/L0_devhub_deploy</a> commit <a href="https://github.com/ThothDivision/L0_devhub_deploy/tree/29abc9f68731963039a2fbfc3371f0237c93d39e"><code>29abc9f68731</code></a> (committed 2026-10-12), files <code>ui/lib/api-catalog.ts</code> and <code>crates/shadw-cli/src/main.rs</code>.</p>
+<p>The catalog lists <strong>34 endpoints</strong> in 8 groups and the <code>shadw</code> CLI has <strong>14 top-level commands</strong>. See <a href="./index.html">DevHub (Layer 0)</a> for authentication, base URLs and what is live.</p>
+<aside class="notice"><p class="notice-title">Base URL</p>
+<p>The catalog documents <code>https://api.shadw.cloud</code> as the public base URL. That host was not verified as reachable during this review; a self-hosted node serves the same admin API on <code>http://127.0.0.1:8786</code> by default (the CLI's default).</p>
+</aside>
+<h2 id="endpoints">Endpoints</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Group</th>
+<th>Method</th>
+<th>Path</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Deployments</td>
+<td>POST</td>
+<td><code>/v1/git/deploy</code></td>
+<td>Clone, build and deploy a Git repository. Returns a build id you can stream logs from. The branch (vs the project's production branch) decides production vs preview.</td>
+</tr>
+<tr>
+<td>Deployments</td>
+<td>GET</td>
+<td><code>/v1/builds/{id}</code></td>
+<td>Poll a build's status and streamed logs. State is one of building, ready or error.</td>
+</tr>
+<tr>
+<td>Deployments</td>
+<td>POST</td>
+<td><code>/v1/deployments/{id}/promote</code></td>
+<td>Promote (or roll back to) a deployment — instantly re-points the production alias to it. No rebuild.</td>
+</tr>
+<tr>
+<td>Deployments</td>
+<td>POST</td>
+<td><code>/v1/projects/{project}/redeploy</code></td>
+<td>Rebuild a project's latest source with the current project settings.</td>
+</tr>
+<tr>
+<td>Deployments</td>
+<td>DELETE</td>
+<td><code>/v1/deployments/{id}</code></td>
+<td>Delete a single deployment and unregister its functions.</td>
+</tr>
+<tr>
+<td>Projects</td>
+<td>GET</td>
+<td><code>/v1/projects/{project}/settings</code></td>
+<td>Read a project's settings (build config, env, domains, production branch, preview protection).</td>
+</tr>
+<tr>
+<td>Projects</td>
+<td>POST</td>
+<td><code>/v1/projects/{project}/env</code></td>
+<td>Add or update an environment variable. Sensitive values are encrypted at rest (ChaCha20-Poly1305).</td>
+</tr>
+<tr>
+<td>Projects</td>
+<td>DELETE</td>
+<td><code>/v1/projects/{project}/env/{key}</code></td>
+<td>Remove an environment variable from a project.</td>
+</tr>
+<tr>
+<td>Projects</td>
+<td>DELETE</td>
+<td><code>/v1/projects/{project}</code></td>
+<td>Delete a project and all of its deployments.</td>
+</tr>
+<tr>
+<td>Domains</td>
+<td>GET</td>
+<td><code>/v1/domains</code></td>
+<td>List the custom domains for the active team.</td>
+</tr>
+<tr>
+<td>Domains</td>
+<td>POST</td>
+<td><code>/v1/projects/{project}/domains</code></td>
+<td>Attach a custom domain to a project. The domain's root label is aliased to the project's current deployment.</td>
+</tr>
+<tr>
+<td>Domains</td>
+<td>GET</td>
+<td><code>/v1/domains/{domain}</code></td>
+<td>Get a domain with its DNS records, nameservers, SSL certificate and connected projects.</td>
+</tr>
+<tr>
+<td>Domains</td>
+<td>PUT</td>
+<td><code>/v1/domains/{domain}/nameservers</code></td>
+<td>Set the domain's nameservers (when delegating the whole zone to shadw).</td>
+</tr>
+<tr>
+<td>Domains</td>
+<td>POST</td>
+<td><code>/v1/domains/{domain}/ssl/renew</code></td>
+<td>Reissue the free managed (Let's Encrypt-style) certificate for the domain.</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>POST</td>
+<td><code>/v1/domains/{domain}/records</code></td>
+<td>Create a DNS record. shadw's authoritative DNS server answers queries for the domain from these records.</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>PUT</td>
+<td><code>/v1/domains/{domain}/records/{id}</code></td>
+<td>Edit an existing DNS record (system-managed records are immutable).</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>DELETE</td>
+<td><code>/v1/domains/{domain}/records/{id}</code></td>
+<td>Delete a DNS record.</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>POST</td>
+<td><code>/v1/domains/{domain}/import</code></td>
+<td>Bulk-import records (DNS migration) from a list and/or a pasted BIND zone file. Idempotent — exact duplicates are skipped.</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>GET</td>
+<td><code>/v1/domains/{domain}/scan</code></td>
+<td>Detect a domain's CURRENT public DNS records (via DNS-over-HTTPS) so they can be migrated into the console with one click. Records are returned, not added.</td>
+</tr>
+<tr>
+<td>Webhooks</td>
+<td>GET</td>
+<td><code>/v1/webhooks</code></td>
+<td>List outbound webhooks for the active team.</td>
+</tr>
+<tr>
+<td>Webhooks</td>
+<td>GET</td>
+<td><code>/v1/webhooks/events</code></td>
+<td>List the event types a webhook can subscribe to.</td>
+</tr>
+<tr>
+<td>Webhooks</td>
+<td>POST</td>
+<td><code>/v1/git/webhook</code></td>
+<td>Inbound GitHub webhook. A push to the production branch deploys to production; any other branch or a pull request builds a preview.</td>
+</tr>
+<tr>
+<td>Webhooks</td>
+<td>DELETE</td>
+<td><code>/v1/webhooks/{id}</code></td>
+<td>Delete an outbound webhook.</td>
+</tr>
+<tr>
+<td>Teams</td>
+<td>GET</td>
+<td><code>/v1/teams</code></td>
+<td>List the teams you belong to.</td>
+</tr>
+<tr>
+<td>Teams</td>
+<td>GET</td>
+<td><code>/v1/teams/{slug}</code></td>
+<td>Get a team's details, members and plan.</td>
+</tr>
+<tr>
+<td>Teams</td>
+<td>POST</td>
+<td><code>/v1/teams/{slug}/members</code></td>
+<td>Invite a member to a team.</td>
+</tr>
+<tr>
+<td>Teams</td>
+<td>DELETE</td>
+<td><code>/v1/teams/{slug}/members/{email}</code></td>
+<td>Remove a member from a team.</td>
+</tr>
+<tr>
+<td>Tokens &amp; API Keys</td>
+<td>POST</td>
+<td><code>/v1/apikeys</code></td>
+<td>Create a long-lived platform API key (hive_…) bound to the active team. The plaintext token is returned exactly once — only its SHA-256 hash is stored. Present it as <code>Authorization: Bearer hive_…</code> to scope requests to the key's team.</td>
+</tr>
+<tr>
+<td>Tokens &amp; API Keys</td>
+<td>GET</td>
+<td><code>/v1/apikeys</code></td>
+<td>List the API keys for the active team. Only the display prefix is returned — the full token is shown once at creation and never stored.</td>
+</tr>
+<tr>
+<td>Tokens &amp; API Keys</td>
+<td>DELETE</td>
+<td><code>/v1/apikeys/{id}</code></td>
+<td>Revoke an API key. Requests presenting the revoked token stop resolving immediately.</td>
+</tr>
+<tr>
+<td>Tokens &amp; API Keys</td>
+<td>POST</td>
+<td><code>/v1/token</code></td>
+<td>Mint a short-lived (8 h) JWT bearer token scoped to a team + role. Requires HIVE_JWT_SECRET to be configured on the node (returns 400 otherwise). When JWT auth is enforced, mutating requests must present a JWT.</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>GET</td>
+<td><code>/v1/overview</code></td>
+<td>Platform overview: deployments, regions, request counters and WAF status.</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>GET</td>
+<td><code>/v1/logs</code></td>
+<td>Recent request + control-plane events for the active team.</td>
+</tr>
+<tr>
+<td>Observability</td>
+<td>GET</td>
+<td><code>/v1/resources</code></td>
+<td>Live cluster resource totals (CPU, memory, disk) across the mesh and this node's usage.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="deployments">Deployments</h2>
+<h3 id="create-a-deployment">Create a deployment</h3>
+<p><code>POST /v1/git/deploy</code></p>
+<p>Clone, build and deploy a Git repository. Returns a build id you can stream logs from. The branch (vs the project's production branch) decides production vs preview.</p>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo_url</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Git repository URL to clone and build.</td>
+</tr>
+<tr>
+<td><code>branch</code></td>
+<td>string</td>
+<td>no</td>
+<td>Branch to deploy (defaults to the repo's default branch).</td>
+</tr>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>no</td>
+<td>Project name (auto-generated when omitted).</td>
+</tr>
+<tr>
+<td><code>root_dir</code></td>
+<td>string</td>
+<td>no</td>
+<td>Subdirectory to build, for monorepos.</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>"production" | "preview"</td>
+<td>no</td>
+<td>Force the environment; omit to classify by branch.</td>
+</tr>
+<tr>
+<td><code>use_cache</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Reuse the dependency build cache (default true).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-a-build">Get a build</h3>
+<p><code>GET /v1/builds/{id}</code></p>
+<p>Poll a build's status and streamed logs. State is one of building, ready or error.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The build id returned by Create a deployment.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="promote-a-deployment">Promote a deployment</h3>
+<p><code>POST /v1/deployments/{id}/promote</code></p>
+<p>Promote (or roll back to) a deployment — instantly re-points the production alias to it. No rebuild.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The deployment id to promote.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="redeploy-a-project">Redeploy a project</h3>
+<p><code>POST /v1/projects/{project}/redeploy</code></p>
+<p>Rebuild a project's latest source with the current project settings.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The project name.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td>"production" | "preview"</td>
+<td>no</td>
+<td>Environment for the new deployment.</td>
+</tr>
+<tr>
+<td><code>use_cache</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Reuse the existing build cache (default true).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delete-a-deployment">Delete a deployment</h3>
+<p><code>DELETE /v1/deployments/{id}</code></p>
+<p>Delete a single deployment and unregister its functions.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The deployment id to delete.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="projects">Projects</h2>
+<h3 id="get-project-settings">Get project settings</h3>
+<p><code>GET /v1/projects/{project}/settings</code></p>
+<p>Read a project's settings (build config, env, domains, production branch, preview protection).</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The project name.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="set-an-environment-variable">Set an environment variable</h3>
+<p><code>POST /v1/projects/{project}/env</code></p>
+<p>Add or update an environment variable. Sensitive values are encrypted at rest (ChaCha20-Poly1305).</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The project name.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Variable name.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Value (sealed at rest when sensitive).</td>
+</tr>
+<tr>
+<td><code>target</code></td>
+<td>"production" | "preview" | "all"</td>
+<td>no</td>
+<td>Which environments it applies to.</td>
+</tr>
+<tr>
+<td><code>sensitive</code></td>
+<td>boolean</td>
+<td>no</td>
+<td>Encrypt at rest and mask in the UI.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delete-an-environment-variable">Delete an environment variable</h3>
+<p><code>DELETE /v1/projects/{project}/env/{key}</code></p>
+<p>Remove an environment variable from a project.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The project name.</td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The variable name to delete.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delete-a-project">Delete a project</h3>
+<p><code>DELETE /v1/projects/{project}</code></p>
+<p>Delete a project and all of its deployments.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The project name.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="domains">Domains</h2>
+<h3 id="list-domains">List domains</h3>
+<p><code>GET /v1/domains</code></p>
+<p>List the custom domains for the active team.</p>
+<h3 id="attach-a-domain-to-a-project">Attach a domain to a project</h3>
+<p><code>POST /v1/projects/{project}/domains</code></p>
+<p>Attach a custom domain to a project. The domain's root label is aliased to the project's current deployment.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The project name.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The fully-qualified domain to attach.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-a-domain">Get a domain</h3>
+<p><code>GET /v1/domains/{domain}</code></p>
+<p>Get a domain with its DNS records, nameservers, SSL certificate and connected projects.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="set-nameservers">Set nameservers</h3>
+<p><code>PUT /v1/domains/{domain}/nameservers</code></p>
+<p>Set the domain's nameservers (when delegating the whole zone to shadw).</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nameservers</code></td>
+<td>string[]</td>
+<td>yes</td>
+<td>Nameservers to delegate the zone to.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="renew-the-ssl-certificate">Renew the SSL certificate</h3>
+<p><code>POST /v1/domains/{domain}/ssl/renew</code></p>
+<p>Reissue the free managed (Let's Encrypt-style) certificate for the domain.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dns">DNS</h2>
+<h3 id="create-a-dns-record">Create a DNS record</h3>
+<p><code>POST /v1/domains/{domain}/records</code></p>
+<p>Create a DNS record. shadw's authoritative DNS server answers queries for the domain from these records.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>"A" | "AAAA" | "CNAME" | "TXT" | "MX" | "NS"</td>
+<td>yes</td>
+<td>Record type.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Subdomain (e.g. "www") or "@" for the apex.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Record value (IP, hostname, text…).</td>
+</tr>
+<tr>
+<td><code>ttl</code></td>
+<td>number</td>
+<td>no</td>
+<td>Time-to-live in seconds (default 3600).</td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td>number</td>
+<td>no</td>
+<td>Priority (MX records).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="update-a-dns-record">Update a DNS record</h3>
+<p><code>PUT /v1/domains/{domain}/records/{id}</code></p>
+<p>Edit an existing DNS record (system-managed records are immutable).</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The record id.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Record type.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Subdomain or @ for the apex.</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Record value.</td>
+</tr>
+<tr>
+<td><code>ttl</code></td>
+<td>number</td>
+<td>no</td>
+<td>Time-to-live in seconds.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="delete-a-dns-record">Delete a DNS record</h3>
+<p><code>DELETE /v1/domains/{domain}/records/{id}</code></p>
+<p>Delete a DNS record.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The record id.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="import-dns-records">Import DNS records</h3>
+<p><code>POST /v1/domains/{domain}/import</code></p>
+<p>Bulk-import records (DNS migration) from a list and/or a pasted BIND zone file. Idempotent — exact duplicates are skipped.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>records</code></td>
+<td>DnsRecord[]</td>
+<td>no</td>
+<td>Structured records to import.</td>
+</tr>
+<tr>
+<td><code>zone</code></td>
+<td>string</td>
+<td>no</td>
+<td>Raw BIND-style zone text to parse and import.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="scan-existing-dns">Scan existing DNS</h3>
+<p><code>GET /v1/domains/{domain}/scan</code></p>
+<p>Detect a domain's CURRENT public DNS records (via DNS-over-HTTPS) so they can be migrated into the console with one click. Records are returned, not added.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>domain</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The domain name.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="webhooks">Webhooks</h2>
+<h3 id="list-webhooks">List webhooks</h3>
+<p><code>GET /v1/webhooks</code></p>
+<p>List outbound webhooks for the active team.</p>
+<h3 id="list-webhook-events">List webhook events</h3>
+<p><code>GET /v1/webhooks/events</code></p>
+<p>List the event types a webhook can subscribe to.</p>
+<h3 id="inbound-git-webhook">Inbound Git webhook</h3>
+<p><code>POST /v1/git/webhook</code></p>
+<p>Inbound GitHub webhook. A push to the production branch deploys to production; any other branch or a pull request builds a preview.</p>
+<h3 id="delete-a-webhook">Delete a webhook</h3>
+<p><code>DELETE /v1/webhooks/{id}</code></p>
+<p>Delete an outbound webhook.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The webhook id.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="teams">Teams</h2>
+<h3 id="list-teams">List teams</h3>
+<p><code>GET /v1/teams</code></p>
+<p>List the teams you belong to.</p>
+<h3 id="get-a-team">Get a team</h3>
+<p><code>GET /v1/teams/{slug}</code></p>
+<p>Get a team's details, members and plan.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slug</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The team slug.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="add-a-team-member">Add a team member</h3>
+<p><code>POST /v1/teams/{slug}/members</code></p>
+<p>Invite a member to a team.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slug</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The team slug.</td>
+</tr>
+</tbody>
+</table>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The member's email.</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>"owner" | "member"</td>
+<td>no</td>
+<td>Role to assign (default member).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remove-a-team-member">Remove a team member</h3>
+<p><code>DELETE /v1/teams/{slug}/members/{email}</code></p>
+<p>Remove a member from a team.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>slug</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The team slug.</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The member's email.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tokens-api-keys">Tokens &amp; API Keys</h2>
+<h3 id="create-an-api-key">Create an API key</h3>
+<p><code>POST /v1/apikeys</code></p>
+<p>Create a long-lived platform API key (hive_…) bound to the active team. The plaintext token is returned exactly once — only its SHA-256 hash is stored. Present it as <code>Authorization: Bearer hive_…</code> to scope requests to the key's team.</p>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>yes</td>
+<td>A label for the key (e.g. "ci").</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>"owner" | "member"</td>
+<td>no</td>
+<td>Role bound to the key (default "member").</td>
+</tr>
+</tbody>
+</table>
+<h3 id="list-api-keys">List API keys</h3>
+<p><code>GET /v1/apikeys</code></p>
+<p>List the API keys for the active team. Only the display prefix is returned — the full token is shown once at creation and never stored.</p>
+<h3 id="revoke-an-api-key">Revoke an API key</h3>
+<p><code>DELETE /v1/apikeys/{id}</code></p>
+<p>Revoke an API key. Requests presenting the revoked token stop resolving immediately.</p>
+<p>Path parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>The API key id.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mint-a-token">Mint a token</h3>
+<p><code>POST /v1/token</code></p>
+<p>Mint a short-lived (8 h) JWT bearer token scoped to a team + role. Requires HIVE_JWT_SECRET to be configured on the node (returns 400 otherwise). When JWT auth is enforced, mutating requests must present a JWT.</p>
+<p>Body:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sub</code></td>
+<td>string</td>
+<td>no</td>
+<td>Subject / user id embedded in the token (default "user").</td>
+</tr>
+<tr>
+<td><code>tenant</code></td>
+<td>string</td>
+<td>no</td>
+<td>Team slug the token is scoped to (default "default").</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>"owner" | "member" | "service"</td>
+<td>no</td>
+<td>Role embedded in the token (default "owner").</td>
+</tr>
+</tbody>
+</table>
+<h2 id="observability">Observability</h2>
+<h3 id="get-the-overview">Get the overview</h3>
+<p><code>GET /v1/overview</code></p>
+<p>Platform overview: deployments, regions, request counters and WAF status.</p>
+<h3 id="get-logs">Get logs</h3>
+<p><code>GET /v1/logs</code></p>
+<p>Recent request + control-plane events for the active team.</p>
+<p>Query parameters:</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>limit</code></td>
+<td>number</td>
+<td>no</td>
+<td>Max events to return (default 100).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="get-cluster-resources">Get cluster resources</h3>
+<p><code>GET /v1/resources</code></p>
+<p>Live cluster resource totals (CPU, memory, disk) across the mesh and this node's usage.</p>
+<h2 id="shadw-cli-commands">shadw CLI commands</h2>
+<p>Every request sends <code>Authorization: Bearer &lt;key&gt;</code>. Configure with <code>shadw auth</code> (saves <code>~/.shadw/config.json</code>) or the environment: <code>SHADW_API_URL</code>, <code>SHADW_TOKEN</code>, <code>SHADW_TEAM</code>.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shadw auth</code></td>
+<td>Authenticate the CLI with your API key (saves ~/.shadw/config.json).</td>
+</tr>
+<tr>
+<td><code>shadw deploy</code></td>
+<td>Deploy a Git repository (clone → build → deploy).</td>
+</tr>
+<tr>
+<td><code>shadw build</code></td>
+<td>Inspect a build (status + streamed logs).</td>
+</tr>
+<tr>
+<td><code>shadw deployments</code></td>
+<td>Deployments — list, promote (rollback), delete, inspect.</td>
+</tr>
+<tr>
+<td><code>shadw projects</code></td>
+<td>Projects — settings, env vars, redeploy, domains, delete.</td>
+</tr>
+<tr>
+<td><code>shadw domains</code></td>
+<td>Domains &amp; DNS — records, migration (scan/import), nameservers, SSL.</td>
+</tr>
+<tr>
+<td><code>shadw webhooks</code></td>
+<td>Outbound webhooks.</td>
+</tr>
+<tr>
+<td><code>shadw teams</code></td>
+<td>Teams &amp; members.</td>
+</tr>
+<tr>
+<td><code>shadw keys</code></td>
+<td>API keys.</td>
+</tr>
+<tr>
+<td><code>shadw databases</code></td>
+<td>Databases.</td>
+</tr>
+<tr>
+<td><code>shadw cron</code></td>
+<td>Cron jobs.</td>
+</tr>
+<tr>
+<td><code>shadw workflows</code></td>
+<td>Workflows.</td>
+</tr>
+<tr>
+<td><code>shadw observability</code></td>
+<td>Observability — overview, logs, resources, metrics, regions, nodes.</td>
+</tr>
+<tr>
+<td><code>shadw api</code></td>
+<td>Generic API passthrough for any endpoint (escape hatch).</td>
+</tr>
+</tbody>
+</table>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="index.html">← DevHub (Layer 0)</a><a rel="next" href="../mcp/index.html">Autheo MCP server →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#endpoints">Endpoints</a></li><li><a href="#deployments">Deployments</a></li><li><a href="#create-a-deployment">Create a deployment</a></li><li><a href="#get-a-build">Get a build</a></li><li><a href="#promote-a-deployment">Promote a deployment</a></li><li><a href="#redeploy-a-project">Redeploy a project</a></li><li><a href="#delete-a-deployment">Delete a deployment</a></li><li><a href="#projects">Projects</a></li><li><a href="#get-project-settings">Get project settings</a></li><li><a href="#set-an-environment-variable">Set an environment variable</a></li><li><a href="#delete-an-environment-variable">Delete an environment variable</a></li><li><a href="#delete-a-project">Delete a project</a></li><li><a href="#domains">Domains</a></li><li><a href="#list-domains">List domains</a></li><li><a href="#attach-a-domain-to-a-project">Attach a domain to a project</a></li><li><a href="#get-a-domain">Get a domain</a></li><li><a href="#set-nameservers">Set nameservers</a></li><li><a href="#renew-the-ssl-certificate">Renew the SSL certificate</a></li><li><a href="#dns">DNS</a></li><li><a href="#create-a-dns-record">Create a DNS record</a></li><li><a href="#update-a-dns-record">Update a DNS record</a></li><li><a href="#delete-a-dns-record">Delete a DNS record</a></li><li><a href="#import-dns-records">Import DNS records</a></li><li><a href="#scan-existing-dns">Scan existing DNS</a></li><li><a href="#webhooks">Webhooks</a></li><li><a href="#list-webhooks">List webhooks</a></li><li><a href="#list-webhook-events">List webhook events</a></li><li><a href="#inbound-git-webhook">Inbound Git webhook</a></li><li><a href="#delete-a-webhook">Delete a webhook</a></li><li><a href="#teams">Teams</a></li><li><a href="#list-teams">List teams</a></li><li><a href="#get-a-team">Get a team</a></li><li><a href="#add-a-team-member">Add a team member</a></li><li><a href="#remove-a-team-member">Remove a team member</a></li><li><a href="#tokens-api-keys">Tokens &amp; API Keys</a></li><li><a href="#create-an-api-key">Create an API key</a></li><li><a href="#list-api-keys">List API keys</a></li><li><a href="#revoke-an-api-key">Revoke an API key</a></li><li><a href="#mint-a-token">Mint a token</a></li><li><a href="#observability">Observability</a></li><li><a href="#get-the-overview">Get the overview</a></li><li><a href="#get-logs">Get logs</a></li><li><a href="#get-cluster-resources">Get cluster resources</a></li><li><a href="#shadw-cli-commands">shadw CLI commands</a></li></ul></aside></div></body></html>
