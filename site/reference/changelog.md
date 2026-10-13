@@ -2,6 +2,10 @@
 
 Changes to this documentation site. Product release notes live in each product repository.
 
+## 2026-10-12 (layered stack)
+
+- **Restructured around the layered stack:** the Autheo L1 underlies everything; the marketplace sells Layer 0 capacity; DevHub deploys to the L0 mesh; the app ecosystem sits on top. New diagram, new pages [The Autheo stack](../platform/stack.md) (layers plus one deployment from push to settlement) and [Layer 0 mesh](../platform/l0-mesh.md) (network, compute, data, identity fabrics from L0_devhub_deploy `29abc9f`).
+
 ## 2026-10-12 (platform map)
 
 - **New: Platform section** organised around the go-to-market vision: [platform map](../platform/index.md) with diagram, [Build with DevHub](../platform/build.md) (IDE toolkit, full-stack SDKs, workflow/DAG engine, agentic OS), [compute and storage marketplace](../platform/compute-marketplace.md), [developer usage and billing](../platform/developer-usage.md), [app ecosystem](../platform/app-ecosystem.md), [THEO economy](../platform/theo-economy.md), [L1 testnet and mainnet](../platform/l1-networks.md), [developer journeys](../platform/journeys.md) and a [roadmap scorecard](../platform/roadmap.md). Evidence: L0_devhub_deploy `29abc9f`, dev.autheo.com and testnet RPC probes.

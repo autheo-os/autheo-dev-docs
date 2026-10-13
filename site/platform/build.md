@@ -1,6 +1,6 @@
 # Build with DevHub (surface 1)
 
-**DevHub** is Autheo Labs' complete developer toolkit and the first go-to-market surface. It is live at [dev.autheo.com](https://dev.autheo.com) and its source is [autheo-os/L0_devhub_deploy](https://github.com/autheo-os/L0_devhub_deploy) (reviewed at commit `29abc9f`). The vision groups it into four layers; this page documents each one with its real status.
+**DevHub** is Autheo Labs' complete developer toolkit and the first go-to-market surface. It is live at [dev.autheo.com](https://dev.autheo.com) and its source is [autheo-os/L0_devhub_deploy](https://github.com/autheo-os/L0_devhub_deploy) (reviewed at commit `29abc9f`). DevHub is the developer surface: it builds your code and **deploys it to the [Layer 0 mesh](./l0-mesh.md)**, which runs on capacity settled in THEO on the [Autheo L1](./l1-networks.md) (see [The Autheo stack](./stack.md)). The vision groups DevHub into four parts; this page documents each one with its real status.
 
 | Layer | What you get | Status (2026-10-12) |
 | --- | --- | --- |

@@ -10,6 +10,7 @@ This page tracks every box in the [platform map](./index.md) against the go-to-m
 | **1 · Full-stack SDKs** | REST API | Vercel-compatible TS client, agent-trust Python/JS, MCP server | First-party typed Autheo SDKs (TS, Python, Rust) under one auth model |
 | **1 · Workflow / DAG tool** | `/workflows` (sign-in) | Durable runs, graph manifest, replay/cancel/wakeup, console | Visual DAG editor; agent-authored workflows |
 | **1 · Agentic OS** | — | JARVIS stack catalog, Autheo MCP (44 tools), agent trust, GPU inference | Joined agent path: plan → policy → MCP → DevHub → receipt |
+| **Layer 0 mesh** | Serves dev.autheo.com deployments | iroh QUIC network, Fluid compute, microVM cells, GuardianDB replication, leases, browser nodes | Public provider onboarding; published node/region map; zkauth wiring |
 | **2 · App ecosystem** | — | Immutable releases with capabilities/revocation; game presets; templates | Public storefront, publisher payouts, review policy |
 | **3 · Compute/storage marketplace** | — (`marketplace.autheo.dev` unresolved) | Listings link-out, placement policy v1, private HMAC routes, browser and self-hosted nodes | Capacity holds, allocation callbacks, usage ingestion, public host |
 | **Developer usage** | Pricing in THEO | Rate card metering, ledger, THEO wallet checkout | Metered marketplace usage streams |

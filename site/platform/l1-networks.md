@@ -1,6 +1,6 @@
 # Autheo L1: testnet and mainnet
 
-The Autheo L1 is the settlement layer under the whole [platform map](./index.md). It is an EVM-capable Cosmos SDK chain (CometBFT consensus, Ethermint EVM; see [architecture](../concepts/architecture.md)). It has a **testnet**, which DevHub's marketplace settlement targets today, and a published **mainnet** configuration.
+The Autheo L1 is the foundation of the [Autheo stack](./stack.md): every layer above it (marketplace, Layer 0 mesh, DevHub, app ecosystem) is priced in THEO and settles here. L0 does not run consensus; it sends payment and settlement facts to the L1 and keeps logs and bulk data off-chain. It is an EVM-capable Cosmos SDK chain (CometBFT consensus, Ethermint EVM; see [architecture](../concepts/architecture.md)). It has a **testnet**, which DevHub's marketplace settlement targets today, and a published **mainnet** configuration.
 
 ## Testnet (live-probed)
 

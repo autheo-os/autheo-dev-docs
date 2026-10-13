@@ -19,6 +19,10 @@
           "title": "Platform map"
         },
         {
+          "file": "platform/stack.md",
+          "title": "The Autheo stack (L1 → apps)"
+        },
+        {
           "file": "platform/journeys.md",
           "title": "Developer journeys"
         },
@@ -83,8 +87,12 @@
       ]
     },
     {
-      "title": "3 · Run: compute & storage",
+      "title": "Run: L0 mesh & marketplace",
       "pages": [
+        {
+          "file": "platform/l0-mesh.md",
+          "title": "Layer 0 mesh"
+        },
         {
           "file": "platform/compute-marketplace.md",
           "title": "Compute and storage marketplace"

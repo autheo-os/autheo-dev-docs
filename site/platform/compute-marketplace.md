@@ -1,6 +1,6 @@
 # Compute and storage marketplace (surface 3)
 
-The marketplace is where capacity is bought and sold: **buyers** (developers) attach compute or storage to a DevHub project, and **providers** (node operators) supply it and get paid in THEO. It is the third go-to-market surface.
+The marketplace sits between the [Autheo L1](./l1-networks.md) and the [Layer 0 mesh](./l0-mesh.md): it is where L0 capacity is bought and sold, and where those orders settle on the L1: **buyers** (developers) attach compute or storage to a DevHub project, and **providers** (node operators) supply it and get paid in THEO. It is the third go-to-market surface.
 
 This page documents the integration that exists in DevHub source at commit `29abc9f` ([autheo-os/L0_devhub_deploy](https://github.com/autheo-os/L0_devhub_deploy)). The commercial Marketplace application itself is a separate service; for its intended design (offers, matching, disputes) see [Marketplace design](../components/marketplace.md).
 

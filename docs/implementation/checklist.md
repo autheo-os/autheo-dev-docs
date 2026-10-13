@@ -35,6 +35,7 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 - [x] 7. AOS stack concept (concepts/aos-stack.md; THEO: concepts/theo.md) (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
 - [~] 8. FAQ + changelog done (reference/faq.md, reference/changelog.md); remaining: security overview, glossary additions, nav/IA regroup; home + getting-started cross-links.
 - [x] 8b. Platform map restructure (2026-10-12): site/platform/{index,build,compute-marketplace,developer-usage,app-ecosystem,theo-economy,l1-networks,journeys,roadmap}.md; nav regrouped Build/Ship/Run/Settle; assets/platform-map.svg; home/getting-started/glossary cross-links with adaptation notes.
+- [x] 8b2. Layered stack (L1 → marketplace → L0 mesh → DevHub → apps): platform/stack.md, platform/l0-mesh.md, new diagram; 44 pages.
 - [ ] 8c. Remaining: security overview page; README page count; per-surface tutorials once live walkthroughs exist.
 - [ ] 9. README/deployment page updates; final full check, CI green, Pages deploy verified live.
 

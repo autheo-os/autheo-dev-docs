@@ -9,7 +9,7 @@
     {
       "file": "index.md",
       "sourceSha256": "f02924aefa5105fe46df898b2b038dd253044fcde8ea679bc867f239a5868cfc",
-      "publishedSha256": "bb12d30eb66dc8918bbb0f54b2eb9ec3494a04204acdd0f30edebba9a98c78d3",
+      "publishedSha256": "b6a1473dea9c6456bbccdbe9bdabaef96c8fc1cac38cf321871dcdc24d14451d",
       "adaptation": "2026-10-12: added a 'Start with the platform map' section linking the three Autheo surfaces (DevHub, app ecosystem, compute/storage marketplace) and THEO/L1 pages. Existing text unchanged."
     },
     {
@@ -228,7 +228,7 @@
     {
       "file": "reference/changelog.md",
       "sourceSha256": null,
-      "publishedSha256": "25709c0a17487784e42a7f1ae69dcf081401b7fae28c7e1dbb1335ecd121ff28",
+      "publishedSha256": "4e9f52e0050b8b76a6bfc517bb4c357e5d8aa9dfb9b84d72f601326177baba7a",
       "adaptation": null,
       "added": "2026-10-12",
       "sources": [
@@ -260,7 +260,7 @@
     {
       "file": "platform/index.md",
       "sourceSha256": null,
-      "publishedSha256": "4fd9bd490fc3990ccdf827bbcf26f40ec9f331957f881c44601673c85338c9b8",
+      "publishedSha256": "80968460e9ea4ce3bf1fd43ab0963c7ccb6dbc0eea9ae920b673647d5b44ca11",
       "adaptation": null,
       "added": "2026-10-12",
       "sources": [
@@ -272,7 +272,7 @@
     {
       "file": "platform/build.md",
       "sourceSha256": null,
-      "publishedSha256": "901a9bce73ca1654e769c13f0641552fe8f21fce7cc8380287aad9c176a10131",
+      "publishedSha256": "2c6cf8342d46d3f3e1739becff8bcb1888d5991cf2c1a98f8c97dd327289d199",
       "adaptation": null,
       "added": "2026-10-12",
       "sources": [
@@ -289,7 +289,7 @@
     {
       "file": "platform/compute-marketplace.md",
       "sourceSha256": null,
-      "publishedSha256": "bba486b86fa5e5b675a1ba0c2cb8484c358d2302859989c3ce1937252213a183",
+      "publishedSha256": "8a18b086cd1a93b9f1c9e02bbd1739e1b2c8ae88508878d428f75c067791c8d9",
       "adaptation": null,
       "added": "2026-10-12",
       "sources": [
@@ -348,7 +348,7 @@
     {
       "file": "platform/l1-networks.md",
       "sourceSha256": null,
-      "publishedSha256": "a43df5835c89e3759c5dc0342901d0c57d3b33102813638342aae506849de0d6",
+      "publishedSha256": "89b25ec47a749b1df6b3929d1234e8c4b095975a0e332372a202417100a76837",
       "adaptation": null,
       "added": "2026-10-12",
       "sources": [
@@ -373,7 +373,7 @@
     {
       "file": "platform/roadmap.md",
       "sourceSha256": null,
-      "publishedSha256": "24c866806b3b261993715cd0f2a100fb72f8a342ece40b3ac3f6f68b76e6ab63",
+      "publishedSha256": "b604f741157dd946102128bf246c7345901c8b4a9fba6f77c085f4f8a07c7c43",
       "adaptation": null,
       "added": "2026-10-12",
       "sources": [
@@ -381,6 +381,40 @@
         "https://dev.autheo.com (probed 2026-10-12)",
         "site/reference/live-status.md (probes 2026-10-12)",
         "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/docs/marketplace-l0-routing.md"
+      ]
+    },
+    {
+      "file": "platform/stack.md",
+      "sourceSha256": null,
+      "publishedSha256": "04ca2064dbfc615d72bdb24ddaed40b66561316ca758bb3c3ff62df03b92e947",
+      "adaptation": null,
+      "added": "2026-10-12",
+      "sources": [
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/README.md",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/build_executor.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/fluid-gateway/src/lib.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/guardian.rs",
+        "Autheo go-to-market 1.0 diagram (provided by the Autheo team, 2026-10-12)"
+      ]
+    },
+    {
+      "file": "platform/l0-mesh.md",
+      "sourceSha256": null,
+      "publishedSha256": "a825456b458f0986d9f4fc3b8587e18368709a0894eec1569619ed67519df412",
+      "adaptation": null,
+      "added": "2026-10-12",
+      "sources": [
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/README.md",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/ARCHITECTURE.md",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-p2p",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/fluid-compute/src/lib.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/fluid-gateway/src/lib.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/gossip.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/lease.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/guardian.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/dns_geo.rs",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-crsql/Cargo.toml",
+        "https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-zkauth/Cargo.toml"
       ]
     }
   ]

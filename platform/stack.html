@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>The Autheo stack (L1 → apps) · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li><li><a href="index.html">Platform map</a></li><li><a aria-current="page" href="stack.html">The Autheo stack (L1 → apps)</a></li><li><a href="journeys.html">Developer journeys</a></li><li><a href="roadmap.html">Roadmap and status</a></li></ul></section><section class="nav-group"><h2>1 · Build: DevHub</h2><ul><li><a href="build.html">Build with DevHub</a></li><li><a href="../devhub/index.html">DevHub (Layer 0)</a></li><li><a href="../devhub/api.html">DevHub API and CLI reference</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../mcp/index.html">Autheo MCP server</a></li><li><a href="../mcp/tools.html">MCP tool reference</a></li><li><a href="../concepts/aos-stack.html">Agent operating stack (AOS)</a></li><li><a href="../concepts/agent-trust.html">Identity and agent trust</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>2 · Ship: app ecosystem</h2><ul><li><a href="app-ecosystem.html">App ecosystem</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li></ul></section><section class="nav-group"><h2>Run: L0 mesh &amp; marketplace</h2><ul><li><a href="l0-mesh.html">Layer 0 mesh</a></li><li><a href="compute-marketplace.html">Compute and storage marketplace</a></li><li><a href="developer-usage.html">Developer usage and billing</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>Settle: THEO &amp; L1</h2><ul><li><a href="theo-economy.html">THEO economy</a></li><li><a href="../concepts/theo.html">THEO price feed and markets</a></li><li><a href="l1-networks.html">L1 testnet and mainnet</a></li><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/live-status.html">What is live (dated probes)</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li><li><a href="../reference/faq.html">FAQ</a></li><li><a href="../reference/changelog.html">Documentation changelog</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 44 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="the-autheo-stack-from-l1-to-apps">The Autheo stack: from L1 to apps</h1>
+<p>Autheo is a <strong>layered</strong> platform. The <strong>Autheo L1 blockchain underlies everything</strong>. On top of it, providers sell capacity through the <strong>compute and storage marketplace</strong>. That capacity forms the <strong>Layer 0 (L0) mesh</strong>, the peer-to-peer compute fabric. <strong>DevHub</strong> deploys applications and agents <strong>to the L0 mesh</strong>, and the <strong>app ecosystem</strong> distributes what developers build. <strong>THEO</strong> prices and settles every layer.</p>
+<p><img src="../assets/platform-map.svg" alt="The Autheo stack, top to bottom: app ecosystem (2); DevHub (1) with IDE toolkit, full-stack SDKs, workflow/DAG and agentic OS, deploying to the Layer 0 mesh; the L0 mesh with distributed compute, compute, data and network fabrics and identity and trust; the compute/storage marketplace (3); and the Autheo L1 blockchain with testnet and mainnet underneath. THEO runs alongside every layer."></p>
+<p>This layering is the one DevHub's own README uses ("The Autheo Developer Cloud": developer experience → application runtime → distributed compute → compute fabric → data fabric → network fabric → identity and trust → resource marketplace → Autheo Network), source <a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/README.md"><code>README.md</code></a>. The red badges are the go-to-market order.</p>
+<h2 id="the-layers-bottom-up">The layers, bottom up</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Layer</th>
+<th>Job</th>
+<th>Built from</th>
+<th>Status (2026-10-12)</th>
+<th>Read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Autheo L1</strong></td>
+<td>Ordered state, THEO, settlement, durable evidence</td>
+<td>Cosmos SDK, CometBFT, Ethermint EVM, IBC</td>
+<td>Testnet RPC <strong>live</strong> (chain 785); mainnet config published</td>
+<td><a href="./l1-networks.html">L1 testnet and mainnet</a></td>
+</tr>
+<tr>
+<td><strong>Marketplace</strong> (3)</td>
+<td>Sell and buy L0 capacity; pin placement; settle in THEO</td>
+<td>DevHub marketplace boundary + Marketplace service</td>
+<td><strong>Source-backed</strong>; public host not reachable</td>
+<td><a href="./compute-marketplace.html">Compute and storage marketplace</a></td>
+</tr>
+<tr>
+<td><strong>Layer 0 mesh</strong></td>
+<td>Run workloads on many independent nodes</td>
+<td>iroh QUIC, Fluid compute, microVM cells, GuardianDB</td>
+<td><strong>Source-backed</strong>; serves dev.autheo.com deployments</td>
+<td><a href="./l0-mesh.html">Layer 0 mesh</a></td>
+</tr>
+<tr>
+<td><strong>DevHub</strong> (1)</td>
+<td>Turn code into running deployments on L0</td>
+<td>Dashboard, API, CLI, SDKs, workflows, agentic OS</td>
+<td><strong>Live</strong> dashboard (sign-in)</td>
+<td><a href="./build.html">Build with DevHub</a></td>
+</tr>
+<tr>
+<td><strong>App ecosystem</strong> (2)</td>
+<td>Distribute apps, services and agents</td>
+<td>Immutable releases, presets, templates</td>
+<td>Releases <strong>source-backed</strong>; storefront <strong>planned</strong></td>
+<td><a href="./app-ecosystem.html">App ecosystem</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-each-layer-gives-the-one-above">What each layer gives the one above</h2>
+<ul>
+<li><strong>L1 → marketplace:</strong> a token (THEO) and a settlement contract whose <code>Settlement</code> events DevHub verifies, so a provider is paid and the platform fee is taken in one on-chain transaction. (<a href="./theo-economy.html">THEO economy</a>)</li>
+<li><strong>Marketplace → L0:</strong> a placement policy per order: which approved nodes may run a buyer's workload. L0 never falls back to unapproved nodes.</li>
+<li><strong>L0 → DevHub:</strong> compute (functions, containers, sandboxes, GPU), replicated data, routing and TLS across the mesh, with no single cloud region.</li>
+<li><strong>DevHub → app ecosystem:</strong> immutable, capability-declared releases that others can deploy and pay for.</li>
+</ul>
+<h2 id="one-deployment-end-to-end">One deployment, end to end</h2>
+<p>What happens when you push code. Each step names the source that implements it.</p>
+<ol>
+<li><strong>Push.</strong> A Git push (GitHub App or Composio) or an upload reaches DevHub's API. (<a href="../devhub/api.html">DevHub API</a>)</li>
+<li><strong>Build.</strong> DevHub builds in a fail-closed sandbox: Podman with gVisor (<code>runsc</code>), a pinned builder image and quota-limited volumes; repository bytes are copied in, never bind-mounted. (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/build_executor.rs"><code>build_executor.rs</code></a>)</li>
+<li><strong>Immutable deployment.</strong> The result is a content-addressed deployment with its own URL; production is an alias, so promote and rollback are alias moves.</li>
+<li><strong>Place.</strong> Without a marketplace order, DevHub places on healthy platform nodes. With an order, it snapshots the validated placement policy and only uses its approved node IDs. (<a href="./compute-marketplace.html#placement-policy-v1">compute marketplace</a>)</li>
+<li><strong>Distribute to the mesh.</strong> Sealed runtime artifacts move to the chosen L0 nodes; platform state replicates over the iroh mesh through GuardianDB; nodes coordinate by gossip. (<a href="./l0-mesh.html">Layer 0 mesh</a>)</li>
+<li><strong>Serve.</strong> The fluid gateway routes each request to a static asset or a warm Fluid instance over a multiplexed tunnel; DNS answers with the node nearest the client.</li>
+<li><strong>Meter.</strong> Active CPU, memory, requests and GPU time accumulate per tenant. (<a href="./developer-usage.html">developer usage</a>)</li>
+<li><strong>Settle.</strong> Plans and usage are paid in THEO; marketplace orders settle through the fee-split contract, verified against the L1. (<a href="./theo-economy.html">THEO economy</a>)</li>
+</ol>
+<aside class="notice"><p class="notice-title">Evidence level</p>
+<p>Steps 1–7 are implemented in DevHub source at <code>29abc9f</code> and power dev.autheo.com, but these docs did not run a signed-in deployment. Step 8 is source-backed against the testnet profile; mainnet settlement is planned. See <a href="./roadmap.html">roadmap</a>.</p>
+</aside>
+<h2 id="where-agents-fit">Where agents fit</h2>
+<p>Agents are DevHub users like any other: the <a href="./build.html#_4-agentic-os">agentic OS</a> gives them tools (<a href="../mcp/index.html">Autheo MCP</a>), identity and mandates (<a href="../concepts/agent-trust.html">agent trust</a>), and models served from the L0 GPU pool. Their actions deploy to the same mesh and settle through the same L1.</p>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="index.html">← Platform map</a><a rel="next" href="journeys.html">Developer journeys →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#the-layers-bottom-up">The layers, bottom up</a></li><li><a href="#what-each-layer-gives-the-one-above">What each layer gives the one above</a></li><li><a href="#one-deployment-end-to-end">One deployment, end to end</a></li><li><a href="#where-agents-fit">Where agents fit</a></li></ul></aside></div></body></html>
