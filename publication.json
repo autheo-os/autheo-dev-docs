@@ -34,6 +34,14 @@
         {
           "file": "concepts/security.md",
           "title": "Security boundaries"
+        },
+        {
+          "file": "concepts/agent-trust.md",
+          "title": "Identity and agent trust"
+        },
+        {
+          "file": "concepts/aos-stack.md",
+          "title": "Agent operating stack (AOS)"
         }
       ]
     },
@@ -131,6 +139,14 @@
         {
           "file": "reference/glossary.md",
           "title": "Glossary"
+        },
+        {
+          "file": "reference/faq.md",
+          "title": "FAQ"
+        },
+        {
+          "file": "reference/changelog.md",
+          "title": "Documentation changelog"
         }
       ]
     },

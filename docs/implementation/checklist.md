@@ -31,9 +31,9 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
       `site/mcp/index.md` (install/config for Claude Desktop, Claude Code, OpenClaw, generic stdio); CI drift job.
 - [x] 5. DevHub (Layer 0) (overview + generated REST/CLI reference; source is ThothDivision fork, newer than autheo-os): concept page, deploy guide, REST reference generated from `ui/lib/api-catalog.ts`
       cross-checked against `crates/hive-cloud` routes, CLI reference (`shadw`, `hivectl`, `fluidctl`, `hive-cloud`).
-- [ ] 6. Identity / agent trust: concept (did:key, delegation, revocation), guide (CLI walkthrough), API reference.
-- [ ] 7. AOS stack concept (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
-- [ ] 8. Security overview, FAQ, glossary additions, changelog; nav/IA regroup; home + getting-started cross-links.
+- [x] 6. Identity / agent trust (concepts/agent-trust.md): concept (did:key, delegation, revocation), guide (CLI walkthrough), API reference.
+- [x] 7. AOS stack concept (concepts/aos-stack.md; THEO note still pending) (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
+- [~] 8. FAQ + changelog done (reference/faq.md, reference/changelog.md); remaining: security overview, glossary additions, nav/IA regroup; home + getting-started cross-links.
 - [ ] 9. README/deployment page updates; final full check, CI green, Pages deploy verified live.
 
 ## Log
@@ -41,3 +41,4 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 - 2026-10-12: steps 0–2 committed.
 - 2026-10-12 18:xx: step 4 MCP pages (mcp/index.md install/config/clients, generated mcp/tools.md from autheo-MCP@6634165; 44 tools, 5 resources) published; 25 pages, tests 14/14.
 - 2026-10-12: step 5 DevHub pages (devhub/index.md, generated devhub/api.md: 34 endpoints, 14 shadw commands); CI drift checks for both generators. 27 pages.
+- 2026-10-12: steps 6–7 + FAQ/changelog published; 31 pages, tests 14/14. Next: live-status page (3), THEO note, security/glossary, nav cross-links, Pages deploy check.
