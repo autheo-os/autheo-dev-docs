@@ -24,7 +24,7 @@ At this commit: 14 integrated, 5 adapters, 20 planned.
 | Governance & trust | Who may do what, under which budget, with which receipt | JARVIS governance, extracted OpenClaw policy matcher | [Autheo Agent Environment](./agent-trust.md) | |
 | Tools & MCP | Capabilities reached through MCP | MCP TypeScript SDK client, owned fixture MCP server | gm-mcp | [Autheo MCP](../mcp/index.md), Unified CAD MCP, MCP filesystem, GitHub MCP |
 | Models | Inference | | | agentic-router, LiteLLM, hosted model APIs, Ollama |
-| Infrastructure & deploy | Ledger, CI, containers, hosting | Task event ledger, GitHub Actions CI, static container | | OpenTelemetry, Langfuse, Shadw, [Autheo DevHub](../devhub/index.md) |
+| Infrastructure & deploy | Ledger, CI, containers, hosting | Task event ledger, GitHub Actions CI, static container | | OpenTelemetry, Langfuse, [Autheo DevHub](../devhub/index.md) (listed in the JARVIS catalog under both its earlier name Shadw and Autheo DevHub) |
 
 ## How the Autheo pieces fit
 

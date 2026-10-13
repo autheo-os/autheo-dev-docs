@@ -5,9 +5,9 @@ A Cosmos SDK / CometBFT blockchain with EVM support, plus a developer cloud (<a 
 <p><strong>Is dev.autheo.com live?</strong>
 Partly. On 2026-10-12 the public pages (home, docs, pricing, status, blog) were served and the dashboard required sign-in. Details: <a href="../devhub/index.html#what-is-live-today">DevHub → What is live today</a>.</p>
 <p><strong>What is the API base URL?</strong>
-The dashboard's API reference uses <code>https://api.shadw.cloud</code>, which answered <code>/healthz</code> with <code>ok</code> on 2026-10-12. The live getting-started page names <code>https://api.autheo.dev</code>, which did not resolve that day. A self-hosted node serves the API on <code>http://127.0.0.1:8786</code>.</p>
-<p><strong>Why do I see "shadw" everywhere?</strong>
-shadw is DevHub's name inside the code: the CLI is <code>shadw</code>, configuration lives in <code>~/.shadw/</code>, and the API host is <code>api.shadw.cloud</code>. The node software is called Hive. The <code>autheo</code> CLI shown in the DevHub README does not exist yet.</p>
+Everything starts at <a href="https://dev.autheo.com">dev.autheo.com</a>: sign in there and create an API key. The API is currently served from <code>https://api.shadw.cloud</code>, a legacy hostname that answered <code>/healthz</code> with <code>ok</code> on 2026-10-12 (the live getting-started page names <code>https://api.autheo.dev</code>, which did not resolve that day). A self-hosted node serves the API on <code>http://127.0.0.1:8786</code>.</p>
+<p><strong>Why do I sometimes see "shadw"?</strong>
+It is the earlier working name of Autheo DevHub. A few code identifiers still use it: the CLI binary <code>shadw</code>, its config in <code>~/.shadw/</code>, <code>SHADW_*</code> environment variables and the legacy API host <code>api.shadw.cloud</code>. The product is Autheo DevHub at dev.autheo.com; the node software is called Hive.</p>
 <p><strong>How do I deploy something?</strong>
 Sign in at dev.autheo.com, create an API key, then use <code>shadw deploy</code> or <code>POST /v1/git/deploy</code>. See <a href="../devhub/index.html#deploy-with-the-cli">DevHub</a>.</p>
 <p><strong>Can I host a game server?</strong>

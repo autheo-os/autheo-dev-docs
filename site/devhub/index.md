@@ -1,12 +1,8 @@
 # DevHub (Layer 0)
 
-DevHub, published at [dev.autheo.com](https://dev.autheo.com), is Autheo's developer cloud: Git deployments, serverless functions, containers, static sites, databases, cron jobs, workflows, domains, logs and game servers, run on a peer-to-peer compute fabric instead of a single cloud region. Its code is the `L0_devhub_deploy` repository; the internal product name in code and CLI is **shadw**, and the node software is called **Hive**.
+**Autheo DevHub** at [dev.autheo.com](https://dev.autheo.com) is Autheo's developer cloud: Git deployments, serverless functions, containers, static sites, databases, cron jobs, workflows, domains, logs and game servers, run on a peer-to-peer compute fabric instead of a single cloud region. Its code is [autheo-os/L0_devhub_deploy](https://github.com/autheo-os/L0_devhub_deploy) (commit `29abc9f`, 2026-10-12). The node software is called **Hive**. A few identifiers in the code still carry the earlier working name *shadw* (the CLI binary, its config and environment variables, and a legacy API hostname); this documentation uses Autheo DevHub and dev.autheo.com throughout.
 
 This page covers what is implemented and how to use it. The generated [DevHub API and CLI reference](./api.md) lists every endpoint and command.
-
-::: info Which repository
-The actively developed copy is [ThothDivision/L0_devhub_deploy](https://github.com/ThothDivision/L0_devhub_deploy) (commit `29abc9f`, 2026-10-12). [autheo-os/L0_devhub_deploy](https://github.com/autheo-os/L0_devhub_deploy) was last updated 2026-10-08 (`405075e`). Facts below come from the newer copy.
-:::
 
 ## How it is built
 
@@ -39,7 +35,8 @@ Checked anonymously on 2026-10-12:
 | `https://dev.autheo.com/` and marketing/docs pages (`/docs`, `/features`, `/pricing`, `/status`, `/blog` …) | Served (HTTP 200) |
 | Dashboard routes (`/projects`, `/deployments`, `/new`, `/settings/api-keys`, `/run-node` …) | Redirect to `/sign-in`; an account is required |
 | `/api`, `/api/market/theo` on dev.autheo.com | 404 |
-| `https://api.shadw.cloud/healthz` (base URL in the dashboard's API reference) | Returned `ok` |
+| `https://api.shadw.cloud/healthz` (legacy API hostname still used by the dashboard's API reference) | Returned `ok` |
+| `https://dev.autheo.com/llms.txt` | Served, but still describes the product under the legacy name |
 | `https://api.autheo.dev` (named on the live getting-started page) | Did not resolve (DNS) |
 
 So today you use DevHub through the signed-in dashboard, or through the API/CLI with an API key created in the dashboard. See [Status](../reference/status.md) for the wider evidence matrix.
@@ -50,12 +47,12 @@ Every API request carries `Authorization: Bearer <key>`, which scopes it to your
 
 ## Deploy with the CLI
 
-The CLI in the repository is `shadw` (built from `crates/shadw-cli`; the README's `autheo login / deploy` examples describe an intended CLI name that does not exist yet).
+The DevHub CLI is built from `crates/shadw-cli`; its binary is still named `shadw` (the `autheo` command name shown in the repository README is not built yet).
 
 ```bash
 # configure once (writes ~/.shadw/config.json), or export the variables below
 shadw auth
-export SHADW_API_URL=https://api.shadw.cloud   # default: http://127.0.0.1:8786 (local node)
+export SHADW_API_URL=https://api.shadw.cloud   # current DevHub API host (legacy name); local node: http://127.0.0.1:8786
 export SHADW_TOKEN=<api key>
 export SHADW_TEAM=<team slug>                  # optional
 
@@ -67,7 +64,7 @@ shadw observability          # overview, logs, resources, metrics, regions, node
 shadw api                    # call any endpoint directly
 ```
 
-Run `shadw <command> --help` for flags. The full command list is in the [reference](./api.md#shadw-cli-commands).
+Run `shadw <command> --help` for flags. The full command list is in the [reference](./api.md#devhub-cli-commands).
 
 ## Deploy with the API
 

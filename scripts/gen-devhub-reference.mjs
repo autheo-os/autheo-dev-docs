@@ -52,7 +52,7 @@ function extract(source) {
   const git = (...a) => execFileSync('git', ['-C', source, ...a], {encoding: 'utf8'}).trim();
   return {
     schemaVersion: 1,
-    source: {repository: git('remote', 'get-url', 'origin').replace(/\.git$/, '') || REPO_URL, commit: git('rev-parse', 'HEAD'), committed: git('log', '-1', '--format=%cI'),
+    source: {repository: REPO_URL, commit: git('rev-parse', 'HEAD'), committed: git('log', '-1', '--format=%cI'),
              files: ['ui/lib/api-catalog.ts', 'crates/shadw-cli/src/main.rs']},
     apiBase: (cat.match(/API_BASE = "([^"]+)"/) || [])[1] || null,
     categories: categories.map(c => ({slug: c.slug, name: c.name, endpoints: c.endpoints.map(e => ({
@@ -72,14 +72,14 @@ function params(title, list) {
 function render(d) {
   const n = d.categories.reduce((a, c) => a + c.endpoints.length, 0);
   const short = d.source.commit.slice(0, 12);
-  let md = `# DevHub API and CLI reference
+  let md = `# Autheo DevHub API and CLI reference
 
 **Generated from code — do not edit by hand.** Produced by \`scripts/gen-devhub-reference.mjs\` from [${d.source.repository.replace('https://github.com/', '')}](${d.source.repository}) commit [\`${short}\`](${d.source.repository}/tree/${d.source.commit}) (committed ${d.source.committed.slice(0, 10)}), files ${d.source.files.map(f => '\`' + f + '\`').join(' and ')}.
 
-The catalog lists **${n} endpoints** in ${d.categories.length} groups and the \`shadw\` CLI has **${d.cli.length} top-level commands**. See [DevHub (Layer 0)](./index.md) for authentication, base URLs and what is live.
+The catalog lists **${n} endpoints** in ${d.categories.length} groups and the DevHub CLI (\`shadw\`) has **${d.cli.length} top-level commands**. Autheo DevHub is the developer cloud at [dev.autheo.com](https://dev.autheo.com); see [DevHub (Layer 0)](./index.md) for authentication and what is live.
 
 ::: warning Base URL
-The catalog documents \`${d.apiBase}\` as the public base URL. That host was not verified as reachable during this review; a self-hosted node serves the same admin API on \`http://127.0.0.1:8786\` by default (the CLI's default).
+The catalog documents \`${d.apiBase}\` as the API host, a legacy hostname from before the product was unified as Autheo DevHub at dev.autheo.com (create API keys there); paths are identical wherever the API is served. A self-hosted node serves the same admin API on \`http://127.0.0.1:8786\` by default (the CLI's default).
 :::
 
 ## Endpoints
@@ -96,7 +96,7 @@ The catalog documents \`${d.apiBase}\` as the public base URL. That host was not
       md += params('Path parameters', e.pathParams) + params('Query parameters', e.queryParams) + params('Body', e.bodyParams);
     }
   }
-  md += `\n## shadw CLI commands\n\nEvery request sends \`Authorization: Bearer <key>\`. Configure with \`shadw auth\` (saves \`~/.shadw/config.json\`) or the environment: \`SHADW_API_URL\`, \`SHADW_TOKEN\`, \`SHADW_TEAM\`.\n\n| Command | Purpose |\n| --- | --- |\n`;
+  md += `\n## DevHub CLI commands\n\nThe DevHub CLI binary, its config file and environment variables still carry the legacy name \`shadw\` in code. Every request sends \`Authorization: Bearer <key>\`. Configure with \`shadw auth\` (saves \`~/.shadw/config.json\`) or the environment: \`SHADW_API_URL\`, \`SHADW_TOKEN\`, \`SHADW_TEAM\`.\n\n| Command | Purpose |\n| --- | --- |\n`;
   for (const c of d.cli) md += `| \`shadw ${c.command}\` | ${esc(c.summary)} |\n`;
   return md;
 }

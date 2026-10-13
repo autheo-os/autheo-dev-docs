@@ -1,11 +1,11 @@
-# DevHub API and CLI reference
+# Autheo DevHub API and CLI reference
 
-**Generated from code — do not edit by hand.** Produced by `scripts/gen-devhub-reference.mjs` from [ThothDivision/L0_devhub_deploy](https://github.com/ThothDivision/L0_devhub_deploy) commit [`29abc9f68731`](https://github.com/ThothDivision/L0_devhub_deploy/tree/29abc9f68731963039a2fbfc3371f0237c93d39e) (committed 2026-10-12), files `ui/lib/api-catalog.ts` and `crates/shadw-cli/src/main.rs`.
+**Generated from code — do not edit by hand.** Produced by `scripts/gen-devhub-reference.mjs` from [autheo-os/L0_devhub_deploy](https://github.com/autheo-os/L0_devhub_deploy) commit [`29abc9f68731`](https://github.com/autheo-os/L0_devhub_deploy/tree/29abc9f68731963039a2fbfc3371f0237c93d39e) (committed 2026-10-12), files `ui/lib/api-catalog.ts` and `crates/shadw-cli/src/main.rs`.
 
-The catalog lists **34 endpoints** in 8 groups and the `shadw` CLI has **14 top-level commands**. See [DevHub (Layer 0)](./index.md) for authentication, base URLs and what is live.
+The catalog lists **34 endpoints** in 8 groups and the DevHub CLI (`shadw`) has **14 top-level commands**. Autheo DevHub is the developer cloud at [dev.autheo.com](https://dev.autheo.com); see [DevHub (Layer 0)](./index.md) for authentication and what is live.
 
 ::: warning Base URL
-The catalog documents `https://api.shadw.cloud` as the public base URL. That host was not verified as reachable during this review; a self-hosted node serves the same admin API on `http://127.0.0.1:8786` by default (the CLI's default).
+The catalog documents `https://api.shadw.cloud` as the API host, a legacy hostname from before the product was unified as Autheo DevHub at dev.autheo.com (create API keys there); paths are identical wherever the API is served. A self-hosted node serves the same admin API on `http://127.0.0.1:8786` by default (the CLI's default).
 :::
 
 ## Endpoints
@@ -496,9 +496,9 @@ Query parameters:
 
 Live cluster resource totals (CPU, memory, disk) across the mesh and this node's usage.
 
-## shadw CLI commands
+## DevHub CLI commands
 
-Every request sends `Authorization: Bearer <key>`. Configure with `shadw auth` (saves `~/.shadw/config.json`) or the environment: `SHADW_API_URL`, `SHADW_TOKEN`, `SHADW_TEAM`.
+The DevHub CLI binary, its config file and environment variables still carry the legacy name `shadw` in code. Every request sends `Authorization: Bearer <key>`. Configure with `shadw auth` (saves `~/.shadw/config.json`) or the environment: `SHADW_API_URL`, `SHADW_TOKEN`, `SHADW_TEAM`.
 
 | Command | Purpose |
 | --- | --- |

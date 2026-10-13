@@ -7,10 +7,10 @@ A Cosmos SDK / CometBFT blockchain with EVM support, plus a developer cloud ([De
 Partly. On 2026-10-12 the public pages (home, docs, pricing, status, blog) were served and the dashboard required sign-in. Details: [DevHub → What is live today](../devhub/index.md#what-is-live-today).
 
 **What is the API base URL?**
-The dashboard's API reference uses `https://api.shadw.cloud`, which answered `/healthz` with `ok` on 2026-10-12. The live getting-started page names `https://api.autheo.dev`, which did not resolve that day. A self-hosted node serves the API on `http://127.0.0.1:8786`.
+Everything starts at [dev.autheo.com](https://dev.autheo.com): sign in there and create an API key. The API is currently served from `https://api.shadw.cloud`, a legacy hostname that answered `/healthz` with `ok` on 2026-10-12 (the live getting-started page names `https://api.autheo.dev`, which did not resolve that day). A self-hosted node serves the API on `http://127.0.0.1:8786`.
 
-**Why do I see "shadw" everywhere?**
-shadw is DevHub's name inside the code: the CLI is `shadw`, configuration lives in `~/.shadw/`, and the API host is `api.shadw.cloud`. The node software is called Hive. The `autheo` CLI shown in the DevHub README does not exist yet.
+**Why do I sometimes see "shadw"?**
+It is the earlier working name of Autheo DevHub. A few code identifiers still use it: the CLI binary `shadw`, its config in `~/.shadw/`, `SHADW_*` environment variables and the legacy API host `api.shadw.cloud`. The product is Autheo DevHub at dev.autheo.com; the node software is called Hive.
 
 **How do I deploy something?**
 Sign in at dev.autheo.com, create an API key, then use `shadw deploy` or `POST /v1/git/deploy`. See [DevHub](../devhub/index.md#deploy-with-the-cli).

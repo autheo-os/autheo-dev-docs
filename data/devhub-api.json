@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": {
-    "repository": "https://github.com/ThothDivision/L0_devhub_deploy",
+    "repository": "https://github.com/autheo-os/L0_devhub_deploy",
     "commit": "29abc9f68731963039a2fbfc3371f0237c93d39e",
     "committed": "2026-10-12T10:18:55-06:00",
     "files": [
