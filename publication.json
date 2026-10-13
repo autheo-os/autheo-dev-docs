@@ -84,6 +84,19 @@
       ]
     },
     {
+      "title": "MCP server",
+      "pages": [
+        {
+          "file": "mcp/index.md",
+          "title": "Autheo MCP server"
+        },
+        {
+          "file": "mcp/tools.md",
+          "title": "MCP tool reference"
+        }
+      ]
+    },
+    {
       "title": "Reference",
       "pages": [
         {

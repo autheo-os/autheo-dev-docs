@@ -27,7 +27,7 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
       regeneration diff; advisory external link check `scripts/check-links.mjs`).
 - [x] 2. Gap audit: `docs/implementation/gap-audit.md`.
 - [ ] 3. Status page: `reference/live-status.md` (dev.autheo.com live vs planned, dated probes).
-- [ ] 4. MCP: generator `scripts/gen-mcp-reference.mjs` → `site/mcp/tools.md` + `data/mcp-tools.json`;
+- [~] 4. MCP (pages done; CI drift job pending): generator `scripts/gen-mcp-reference.mjs` → `site/mcp/tools.md` + `data/mcp-tools.json`;
       `site/mcp/index.md` (install/config for Claude Desktop, Claude Code, OpenClaw, generic stdio); CI drift job.
 - [ ] 5. DevHub (Layer 0): concept page, deploy guide, REST reference generated from `ui/lib/api-catalog.ts`
       cross-checked against `crates/hive-cloud` routes, CLI reference (`shadw`, `hivectl`, `fluidctl`, `hive-cloud`).
@@ -39,3 +39,4 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 ## Log
 
 - 2026-10-12: steps 0–2 committed.
+- 2026-10-12 18:xx: step 4 MCP pages (mcp/index.md install/config/clients, generated mcp/tools.md from autheo-MCP@6634165; 44 tools, 5 resources) published; 25 pages, tests 14/14.

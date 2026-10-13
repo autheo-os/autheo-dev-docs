@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>MCP tool reference · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Ecosystem components</h2><ul><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>Guides</h2><ul><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>MCP server</h2><ul><li><a href="index.html">Autheo MCP server</a></li><li><a aria-current="page" href="tools.html">MCP tool reference</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 25 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="mcp-tool-reference">MCP tool reference</h1>
+<p><strong>Generated from code — do not edit by hand.</strong> This page is produced by <code>scripts/gen-mcp-reference.mjs</code> from <a href="https://github.com/autheo-os/autheo-MCP">autheo-os/autheo-MCP</a> commit <a href="https://github.com/autheo-os/autheo-MCP/tree/663416577abbd4ef5b7bb2d85448e70bb1a828f5"><code>663416577abb</code></a> (package version <code>0.3.0a1</code>, committed 2026-10-12) using FastMCP tools/list and resources/list introspection of autheo_mcp.server.</p>
+<p>The registered surface at that commit is <strong>44 tools</strong> and <strong>5 resources</strong>. 44 of 44 tools declare the MCP <code>readOnlyHint</code> annotation. A tool being registered does not mean a live Autheo service is reachable: every tool calls only the endpoints you configure (see <a href="./index.html">MCP server</a>).</p>
+<aside class="notice"><p class="notice-title">Source-backed, not live-tested</p>
+<p>The MCP README states the implementation was verified with local contract fixtures and MCP stdio sessions, "not proof of access to a live Autheo installation". Descriptions below are the docstrings registered in code.</p>
+</aside>
+<h2 id="summary">Summary</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Group</th>
+<th>Tools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#server-and-setup">Server and setup</a></td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href="#chain-reads-cometbft-cosmos-rest">Chain reads (CometBFT / Cosmos REST)</a></td>
+<td>6</td>
+</tr>
+<tr>
+<td><a href="#theo-display-price">THEO display price</a></td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href="#marketplace">Marketplace</a></td>
+<td>11</td>
+</tr>
+<tr>
+<td><a href="#devhub-hive-admin-api">DevHub (Hive admin API)</a></td>
+<td>11</td>
+</tr>
+<tr>
+<td><a href="#legacy-devhub-node-inspection">Legacy DevHub node inspection</a></td>
+<td>6</td>
+</tr>
+<tr>
+<td><a href="#agent-trust-inspection">Agent trust inspection</a></td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="server-and-setup">Server and setup</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_get_integration_guide"><code>autheo_get_integration_guide</code></a></td>
+<td>Local integration map and prerequisites; does not claim a live backend connection.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_server_info"><code>autheo_get_server_info</code></a></td>
+<td>Return information about the Autheo MCP server.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_get_integration_guide">autheo_get_integration_guide</h3>
+<p>Local integration map and prerequisites; does not claim a live backend connection.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_server_info">autheo_get_server_info</h3>
+<p>Return information about the Autheo MCP server.</p>
+<p>This is a local MCP capability check and does not query the blockchain.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="chain-reads-cometbft-cosmos-rest">Chain reads (CometBFT / Cosmos REST)</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_get_account"><code>autheo_get_account</code></a></td>
+<td>Retrieve basic information about an Autheo account.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_balance"><code>autheo_get_balance</code></a></td>
+<td>Retrieve the native THEO balance for an Autheo address.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_block"><code>autheo_get_block</code></a></td>
+<td>Retrieve an Autheo block by height.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_latest_block"><code>autheo_get_latest_block</code></a></td>
+<td>Get the latest Autheo blockchain block.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_network_status"><code>autheo_get_network_status</code></a></td>
+<td>Get the current status of the Autheo network.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_transaction"><code>autheo_get_transaction</code></a></td>
+<td>Retrieve an Autheo transaction by transaction hash.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_get_account">autheo_get_account</h3>
+<p>Retrieve basic information about an Autheo account.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>address</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_balance">autheo_get_balance</h3>
+<p>Retrieve the native THEO balance for an Autheo address.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>address</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_block">autheo_get_block</h3>
+<p>Retrieve an Autheo block by height.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>height</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_latest_block">autheo_get_latest_block</h3>
+<p>Get the latest Autheo blockchain block.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_network_status">autheo_get_network_status</h3>
+<p>Get the current status of the Autheo network.</p>
+<p>Queries the configured CometBFT RPC endpoint and DevHub health endpoint.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_transaction">autheo_get_transaction</h3>
+<p>Retrieve an Autheo transaction by transaction hash.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tx_hash</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="theo-display-price">THEO display price</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_convert_theo_to_usd"><code>autheo_convert_theo_to_usd</code></a></td>
+<td>Convert a THEO amount into its USD reference value using the Autheo oracle.</td>
+</tr>
+<tr>
+<td><a href="#autheo_convert_usd_to_theo"><code>autheo_convert_usd_to_theo</code></a></td>
+<td>Convert a USD reference amount into THEO using the Autheo oracle.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_theo_price"><code>autheo_get_theo_price</code></a></td>
+<td>Return display-only THEO/USD data with freshness status; not settlement authority.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_convert_theo_to_usd">autheo_convert_theo_to_usd</h3>
+<p>Convert a THEO amount into its USD reference value using the
+Autheo oracle.</p>
+<p>This does not execute a trade.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amount_theo</code></td>
+<td>number</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_convert_usd_to_theo">autheo_convert_usd_to_theo</h3>
+<p>Convert a USD reference amount into THEO using the Autheo oracle.</p>
+<p>This is an informational conversion and does not execute a trade.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amount_usd</code></td>
+<td>number</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_theo_price">autheo_get_theo_price</h3>
+<p>Return display-only THEO/USD data with freshness status; not settlement authority.</p>
+<p>This tool is intentionally separated from marketplace pricing.
+Marketplace prices should be denominated in THEO while this oracle
+provides the external USD reference value.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="marketplace">Marketplace</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_get_order"><code>autheo_get_order</code></a></td>
+<td>Retrieve an Autheo marketplace order.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_categories"><code>autheo_marketplace_categories</code></a></td>
+<td>Return the major Autheo marketplace resource categories.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_estimate_listing"><code>autheo_marketplace_estimate_listing</code></a></td>
+<td>Local exact-decimal estimate from current listing price; NOT an authoritative checkout quote/reservation.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_get_capacity"><code>autheo_marketplace_get_capacity</code></a></td>
+<td>Read public capacity projection; does not expose the private mesh advertisement API.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_get_listing"><code>autheo_marketplace_get_listing</code></a></td>
+<td>Get live listing detail, constraints and canonical decimal-string price.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_get_placement_policy"><code>autheo_marketplace_get_placement_policy</code></a></td>
+<td>Read an order's placement constraints; never schedule or mutate the policy.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_get_settlement_status"><code>autheo_marketplace_get_settlement_status</code></a></td>
+<td>Read recorded settlement status. Does NOT verify payments or trigger allocation.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_list_l0_deployments"><code>autheo_marketplace_list_l0_deployments</code></a></td>
+<td>Private HMAC/mTLS service read of short-lived L0 advertisements. Not public listing inventory.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_list_listings"><code>autheo_marketplace_list_listings</code></a></td>
+<td>Browse purchasable Marketplace listings; preserves exact THEO strings and upstream page metadata.</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_list_orders"><code>autheo_marketplace_list_orders</code></a></td>
+<td>List orders for the configured Clerk session's buyer tenant (upstream limit 100).</td>
+</tr>
+<tr>
+<td><a href="#autheo_marketplace_provider_view"><code>autheo_marketplace_provider_view</code></a></td>
+<td>Read own provider profile, listings, node_bindings, orders, or infrastructure_rewards; Clerk role/tenant enforced upstream.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_get_order">autheo_get_order</h3>
+<p>Retrieve an Autheo marketplace order.</p>
+<p>Reads the authenticated Marketplace order. A marketplace order is not a DevHub deployment.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>order_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_categories">autheo_marketplace_categories</h3>
+<p>Return the major Autheo marketplace resource categories.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_estimate_listing">autheo_marketplace_estimate_listing</h3>
+<p>Local exact-decimal estimate from current listing price; NOT an authoritative checkout quote/reservation.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>listing_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>duration_unit</code></td>
+<td>string</td>
+<td>no</td>
+<td><code>"hour"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_get_capacity">autheo_marketplace_get_capacity</h3>
+<p>Read public capacity projection; does not expose the private mesh advertisement API.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_get_listing">autheo_marketplace_get_listing</h3>
+<p>Get live listing detail, constraints and canonical decimal-string price.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>listing_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_get_placement_policy">autheo_marketplace_get_placement_policy</h3>
+<p>Read an order's placement constraints; never schedule or mutate the policy.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>order_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_get_settlement_status">autheo_marketplace_get_settlement_status</h3>
+<p>Read recorded settlement status. Does NOT verify payments or trigger allocation.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>order_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_list_l0_deployments">autheo_marketplace_list_l0_deployments</h3>
+<p>Private HMAC/mTLS service read of short-lived L0 advertisements. Not public listing inventory.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_list_listings">autheo_marketplace_list_listings</h3>
+<p>Browse purchasable Marketplace listings; preserves exact THEO strings and upstream page metadata.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resource_type</code></td>
+<td>string or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>string or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>25</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_list_orders">autheo_marketplace_list_orders</h3>
+<p>List orders for the configured Clerk session's buyer tenant (upstream limit 100).</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_marketplace_provider_view">autheo_marketplace_provider_view</h3>
+<p>Read own provider profile, listings, node_bindings, orders, or infrastructure_rewards; Clerk role/tenant enforced upstream.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td>string</td>
+<td>no</td>
+<td><code>"profile"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="devhub-hive-admin-api">DevHub (Hive admin API)</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_devhub_get_build"><code>autheo_devhub_get_build</code></a></td>
+<td>Read DevHub build state and evidence from the real /v1/builds/{id} route.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_get_build_logs"><code>autheo_devhub_get_build_logs</code></a></td>
+<td>Read the last 1–2000 build log lines; never executes a build.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_get_deployment"><code>autheo_devhub_get_deployment</code></a></td>
+<td>Find a deployment in the team-scoped /deployments response.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_get_deployment_resources"><code>autheo_devhub_get_deployment_resources</code></a></td>
+<td>Read actual deployment resources from DevHub.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_get_job"><code>autheo_devhub_get_job</code></a></td>
+<td>Retrieve an Autheo DevHub workload/job.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_get_project"><code>autheo_devhub_get_project</code></a></td>
+<td>Retrieve an Autheo DevHub project.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_list_deployments"><code>autheo_devhub_list_deployments</code></a></td>
+<td>Read deployments visible to the configured DevHub team.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_list_nodes"><code>autheo_devhub_list_nodes</code></a></td>
+<td>Read and normalize DevHub nodes; hardware totals do not imply available marketplace capacity.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_list_projects"><code>autheo_devhub_list_projects</code></a></td>
+<td>List project names derived from visible deployments; undeployed projects are not included.</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_search"><code>autheo_devhub_search</code></a></td>
+<td>Search deployment-backed DevHub projects and deployments (not a complete project inventory).</td>
+</tr>
+<tr>
+<td><a href="#autheo_devhub_status"><code>autheo_devhub_status</code></a></td>
+<td>Read overview, cluster, mesh, security, or wallet metadata; process liveness is not mesh health.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_devhub_get_build">autheo_devhub_get_build</h3>
+<p>Read DevHub build state and evidence from the real /v1/builds/{id} route.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>build_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_get_build_logs">autheo_devhub_get_build_logs</h3>
+<p>Read the last 1–2000 build log lines; never executes a build.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>build_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>tail</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>200</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_get_deployment">autheo_devhub_get_deployment</h3>
+<p>Find a deployment in the team-scoped /deployments response.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_get_deployment_resources">autheo_devhub_get_deployment_resources</h3>
+<p>Read actual deployment resources from DevHub.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deployment_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_get_job">autheo_devhub_get_job</h3>
+<p>Retrieve an Autheo DevHub workload/job.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>job_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_get_project">autheo_devhub_get_project</h3>
+<p>Retrieve an Autheo DevHub project.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>project_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_list_deployments">autheo_devhub_list_deployments</h3>
+<p>Read deployments visible to the configured DevHub team.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_list_nodes">autheo_devhub_list_nodes</h3>
+<p>Read and normalize DevHub nodes; hardware totals do not imply available marketplace capacity.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_list_projects">autheo_devhub_list_projects</h3>
+<p>List project names derived from visible deployments; undeployed projects are not included.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_search">autheo_devhub_search</h3>
+<p>Search deployment-backed DevHub projects and deployments (not a complete project inventory).</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_devhub_status">autheo_devhub_status</h3>
+<p>Read overview, cluster, mesh, security, or wallet metadata; process liveness is not mesh health.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view</code></td>
+<td>string</td>
+<td>no</td>
+<td><code>"overview"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="legacy-devhub-node-inspection">Legacy DevHub node inspection</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_compute_quote"><code>autheo_compute_quote</code></a></td>
+<td>Generate a simulated compute quote.</td>
+</tr>
+<tr>
+<td><a href="#autheo_compute_search"><code>autheo_compute_search</code></a></td>
+<td>Search reported DevHub hardware, NOT reservable marketplace listings. Use autheo_marketplace_list_listings for purchasable inventory.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_provider"><code>autheo_get_provider</code></a></td>
+<td>Retrieve information about an Autheo marketplace provider.</td>
+</tr>
+<tr>
+<td><a href="#autheo_get_provider_reputation"><code>autheo_get_provider_reputation</code></a></td>
+<td>Retrieve the reputation information for an Autheo provider.</td>
+</tr>
+<tr>
+<td><a href="#autheo_storage_quote"><code>autheo_storage_quote</code></a></td>
+<td>Generate a simulated storage quote.</td>
+</tr>
+<tr>
+<td><a href="#autheo_storage_search"><code>autheo_storage_search</code></a></td>
+<td>Search reported DevHub storage hardware, NOT reservable marketplace listings.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_compute_quote">autheo_compute_quote</h3>
+<p>Generate a simulated compute quote.</p>
+<p>This function MUST NOT create an order or move THEO.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cpu</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ram_gb</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>duration_hours</code></td>
+<td>number</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>storage_gb</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>gpu</code></td>
+<td>string or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>gpu_count</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_compute_search">autheo_compute_search</h3>
+<p>Search reported DevHub hardware, NOT reservable marketplace listings. Use autheo_marketplace_list_listings for purchasable inventory.</p>
+<p>Prices are expressed in THEO. USD conversion should be performed
+separately through the Autheo oracle.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cpu</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>ram_gb</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>storage_gb</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>gpu</code></td>
+<td>string or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>gpu_count</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>max_price_theo_hour</code></td>
+<td>number or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>min_reputation</code></td>
+<td>number or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_provider">autheo_get_provider</h3>
+<p>Retrieve information about an Autheo marketplace provider.</p>
+<p>Providers are represented by DevHub nodes in the L0 deployment.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>provider_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_get_provider_reputation">autheo_get_provider_reputation</h3>
+<p>Retrieve the reputation information for an Autheo provider.</p>
+<p>Currently sourced from DevHub node capacity metadata.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>provider_id</code></td>
+<td>string</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_storage_quote">autheo_storage_quote</h3>
+<p>Generate a simulated storage quote.</p>
+<p>This function MUST NOT create a storage contract or transfer THEO.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storage_gb</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>duration_days</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>replication_factor</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_storage_search">autheo_storage_search</h3>
+<p>Search reported DevHub storage hardware, NOT reservable marketplace listings.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storage_gb</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>duration_days</code></td>
+<td>integer</td>
+<td>yes</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>replication_factor</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>max_price_theo_month</code></td>
+<td>number or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>min_reputation</code></td>
+<td>number or null</td>
+<td>no</td>
+<td><code>null</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="agent-trust-inspection">Agent trust inspection</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Tool</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#autheo_agent_get_mandate"><code>autheo_agent_get_mandate</code></a></td>
+<td>Inspect scoped mandate and DEMO budget summary; no real wallet funds or approvals.</td>
+</tr>
+<tr>
+<td><a href="#autheo_agent_get_passport"><code>autheo_agent_get_passport</code></a></td>
+<td>Read the configured agent's issuer-asserted identity, not a proof of legal ownership.</td>
+</tr>
+<tr>
+<td><a href="#autheo_agent_list_receipts"><code>autheo_agent_list_receipts</code></a></td>
+<td>Read up to 20 signed-snapshot receipt summaries; not an independent action/chain proof.</td>
+</tr>
+<tr>
+<td><a href="#autheo_agent_trust_guide"><code>autheo_agent_trust_guide</code></a></td>
+<td>Explain agent trust setup and boundaries. Does not issue identity, authority, or wallet access.</td>
+</tr>
+<tr>
+<td><a href="#autheo_agent_trust_status"><code>autheo_agent_trust_status</code></a></td>
+<td>Inspect a pinned-issuer signed snapshot and audit summary. Never grants execution authority.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="autheo_agent_get_mandate">autheo_agent_get_mandate</h3>
+<p>Inspect scoped mandate and DEMO budget summary; no real wallet funds or approvals.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_agent_get_passport">autheo_agent_get_passport</h3>
+<p>Read the configured agent's issuer-asserted identity, not a proof of legal ownership.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_agent_list_receipts">autheo_agent_list_receipts</h3>
+<p>Read up to 20 signed-snapshot receipt summaries; not an independent action/chain proof.</p>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>limit</code></td>
+<td>integer</td>
+<td>no</td>
+<td><code>20</code></td>
+</tr>
+</tbody>
+</table>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_agent_trust_guide">autheo_agent_trust_guide</h3>
+<p>Explain agent trust setup and boundaries. Does not issue identity, authority, or wallet access.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h3 id="autheo_agent_trust_status">autheo_agent_trust_status</h3>
+<p>Inspect a pinned-issuer signed snapshot and audit summary. Never grants execution authority.</p>
+<p>Arguments: none.</p>
+<p>Annotations: <code>readOnlyHint: true</code>, <code>destructiveHint: false</code>, <code>idempotentHint: true</code>.</p>
+<h2 id="resources">Resources</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>URI</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>autheo://agent-trust</code></td>
+<td>Local documentation of the external agent environment's trust boundary.</td>
+</tr>
+<tr>
+<td><code>autheo://capabilities</code></td>
+<td>Describe the capabilities exposed by this MCP server.</td>
+</tr>
+<tr>
+<td><code>autheo://integrations</code></td>
+<td>Pinned integration contracts and setup boundaries.</td>
+</tr>
+<tr>
+<td><code>autheo://marketplace</code></td>
+<td>Description of the Autheo marketplace.</td>
+</tr>
+<tr>
+<td><code>autheo://network</code></td>
+<td>Basic Autheo network information.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="regenerate">Regenerate</h2>
+<pre tabindex="0"><code class="language-sh">node scripts/gen-mcp-reference.mjs --source ../autheo-MCP   # clean checkout at the commit to document
+node scripts/gen-mcp-reference.mjs --check                   # CI: Markdown matches data/mcp-tools.json
+npm run docs:build
+</code></pre>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="index.html">← Autheo MCP server</a><a rel="next" href="../reference/api.html">API reference →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#summary">Summary</a></li><li><a href="#server-and-setup">Server and setup</a></li><li><a href="#autheo_get_integration_guide">autheo_get_integration_guide</a></li><li><a href="#autheo_get_server_info">autheo_get_server_info</a></li><li><a href="#chain-reads-cometbft-cosmos-rest">Chain reads (CometBFT / Cosmos REST)</a></li><li><a href="#autheo_get_account">autheo_get_account</a></li><li><a href="#autheo_get_balance">autheo_get_balance</a></li><li><a href="#autheo_get_block">autheo_get_block</a></li><li><a href="#autheo_get_latest_block">autheo_get_latest_block</a></li><li><a href="#autheo_get_network_status">autheo_get_network_status</a></li><li><a href="#autheo_get_transaction">autheo_get_transaction</a></li><li><a href="#theo-display-price">THEO display price</a></li><li><a href="#autheo_convert_theo_to_usd">autheo_convert_theo_to_usd</a></li><li><a href="#autheo_convert_usd_to_theo">autheo_convert_usd_to_theo</a></li><li><a href="#autheo_get_theo_price">autheo_get_theo_price</a></li><li><a href="#marketplace">Marketplace</a></li><li><a href="#autheo_get_order">autheo_get_order</a></li><li><a href="#autheo_marketplace_categories">autheo_marketplace_categories</a></li><li><a href="#autheo_marketplace_estimate_listing">autheo_marketplace_estimate_listing</a></li><li><a href="#autheo_marketplace_get_capacity">autheo_marketplace_get_capacity</a></li><li><a href="#autheo_marketplace_get_listing">autheo_marketplace_get_listing</a></li><li><a href="#autheo_marketplace_get_placement_policy">autheo_marketplace_get_placement_policy</a></li><li><a href="#autheo_marketplace_get_settlement_status">autheo_marketplace_get_settlement_status</a></li><li><a href="#autheo_marketplace_list_l0_deployments">autheo_marketplace_list_l0_deployments</a></li><li><a href="#autheo_marketplace_list_listings">autheo_marketplace_list_listings</a></li><li><a href="#autheo_marketplace_list_orders">autheo_marketplace_list_orders</a></li><li><a href="#autheo_marketplace_provider_view">autheo_marketplace_provider_view</a></li><li><a href="#devhub-hive-admin-api">DevHub (Hive admin API)</a></li><li><a href="#autheo_devhub_get_build">autheo_devhub_get_build</a></li><li><a href="#autheo_devhub_get_build_logs">autheo_devhub_get_build_logs</a></li><li><a href="#autheo_devhub_get_deployment">autheo_devhub_get_deployment</a></li><li><a href="#autheo_devhub_get_deployment_resources">autheo_devhub_get_deployment_resources</a></li><li><a href="#autheo_devhub_get_job">autheo_devhub_get_job</a></li><li><a href="#autheo_devhub_get_project">autheo_devhub_get_project</a></li><li><a href="#autheo_devhub_list_deployments">autheo_devhub_list_deployments</a></li><li><a href="#autheo_devhub_list_nodes">autheo_devhub_list_nodes</a></li><li><a href="#autheo_devhub_list_projects">autheo_devhub_list_projects</a></li><li><a href="#autheo_devhub_search">autheo_devhub_search</a></li><li><a href="#autheo_devhub_status">autheo_devhub_status</a></li><li><a href="#legacy-devhub-node-inspection">Legacy DevHub node inspection</a></li><li><a href="#autheo_compute_quote">autheo_compute_quote</a></li><li><a href="#autheo_compute_search">autheo_compute_search</a></li><li><a href="#autheo_get_provider">autheo_get_provider</a></li><li><a href="#autheo_get_provider_reputation">autheo_get_provider_reputation</a></li><li><a href="#autheo_storage_quote">autheo_storage_quote</a></li><li><a href="#autheo_storage_search">autheo_storage_search</a></li><li><a href="#agent-trust-inspection">Agent trust inspection</a></li><li><a href="#autheo_agent_get_mandate">autheo_agent_get_mandate</a></li><li><a href="#autheo_agent_get_passport">autheo_agent_get_passport</a></li><li><a href="#autheo_agent_list_receipts">autheo_agent_list_receipts</a></li><li><a href="#autheo_agent_trust_guide">autheo_agent_trust_guide</a></li><li><a href="#autheo_agent_trust_status">autheo_agent_trust_status</a></li><li><a href="#resources">Resources</a></li><li><a href="#regenerate">Regenerate</a></li></ul></aside></div></body></html>
