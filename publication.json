@@ -42,6 +42,10 @@
         {
           "file": "concepts/aos-stack.md",
           "title": "Agent operating stack (AOS)"
+        },
+        {
+          "file": "concepts/theo.md",
+          "title": "THEO"
         }
       ]
     },
@@ -131,6 +135,10 @@
         {
           "file": "reference/status.md",
           "title": "Status and support boundaries"
+        },
+        {
+          "file": "reference/live-status.md",
+          "title": "What is live (dated probes)"
         },
         {
           "file": "reference/sources.md",

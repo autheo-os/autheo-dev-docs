@@ -26,13 +26,13 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
       (`scripts/provenance.mjs`); CI workflow `.github/workflows/verify.yml` (build + tests + internal links +
       regeneration diff; advisory external link check `scripts/check-links.mjs`).
 - [x] 2. Gap audit: `docs/implementation/gap-audit.md`.
-- [ ] 3. Status page: `reference/live-status.md` (dev.autheo.com live vs planned, dated probes).
+- [x] 3. Status page (reference/live-status.md): `reference/live-status.md` (dev.autheo.com live vs planned, dated probes).
 - [x] 4. MCP: generator `scripts/gen-mcp-reference.mjs` → `site/mcp/tools.md` + `data/mcp-tools.json`;
       `site/mcp/index.md` (install/config for Claude Desktop, Claude Code, OpenClaw, generic stdio); CI drift job.
 - [x] 5. DevHub (Layer 0) (overview + generated REST/CLI reference; source is ThothDivision fork, newer than autheo-os): concept page, deploy guide, REST reference generated from `ui/lib/api-catalog.ts`
       cross-checked against `crates/hive-cloud` routes, CLI reference (`shadw`, `hivectl`, `fluidctl`, `hive-cloud`).
 - [x] 6. Identity / agent trust (concepts/agent-trust.md): concept (did:key, delegation, revocation), guide (CLI walkthrough), API reference.
-- [x] 7. AOS stack concept (concepts/aos-stack.md; THEO note still pending) (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
+- [x] 7. AOS stack concept (concepts/aos-stack.md; THEO: concepts/theo.md) (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
 - [~] 8. FAQ + changelog done (reference/faq.md, reference/changelog.md); remaining: security overview, glossary additions, nav/IA regroup; home + getting-started cross-links.
 - [ ] 9. README/deployment page updates; final full check, CI green, Pages deploy verified live.
 
@@ -42,3 +42,4 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 - 2026-10-12 18:xx: step 4 MCP pages (mcp/index.md install/config/clients, generated mcp/tools.md from autheo-MCP@6634165; 44 tools, 5 resources) published; 25 pages, tests 14/14.
 - 2026-10-12: step 5 DevHub pages (devhub/index.md, generated devhub/api.md: 34 endpoints, 14 shadw commands); CI drift checks for both generators. 27 pages.
 - 2026-10-12: steps 6–7 + FAQ/changelog published; 31 pages, tests 14/14. Next: live-status page (3), THEO note, security/glossary, nav cross-links, Pages deploy check.
+- 2026-10-12 18:3x: live-status + THEO pages; probes: dev.autheo.com public 200, dashboard 307 sign-in, api.shadw.cloud/healthz 200, api.autheo.dev + autheo.dev no connection. Next: security overview, glossary, cross-links (adaptation notes), then autheo-MCP.

@@ -234,6 +234,28 @@
       "sources": [
         "git history of autheo-os/autheo-dev-docs"
       ]
+    },
+    {
+      "file": "reference/live-status.md",
+      "sourceSha256": null,
+      "publishedSha256": "34a6ac4d5cd656b04b26aa9f029fe7c1d952008a1d87f5cd9ead98dc74e9d053",
+      "adaptation": null,
+      "added": "2026-10-12",
+      "sources": [
+        "HTTP probes with curl on 2026-10-12 ~18:20 America/Denver (recorded in docs/implementation/checklist.md log)"
+      ]
+    },
+    {
+      "file": "concepts/theo.md",
+      "sourceSha256": null,
+      "publishedSha256": "ee13539c50615d22313afee4ff3f7d16cb51449668ad01672d146e0bd1cbc48a",
+      "adaptation": null,
+      "added": "2026-10-12",
+      "sources": [
+        "https://dev.autheo.com/api/market-reference/theo (fetched 2026-10-12)",
+        "https://github.com/autheo-os/theo-atlas/blob/0294acd/README.md",
+        "https://github.com/autheo-os/autheo-MCP/blob/663416577abbd4ef5b7bb2d85448e70bb1a828f5/README.md"
+      ]
     }
   ]
 }
