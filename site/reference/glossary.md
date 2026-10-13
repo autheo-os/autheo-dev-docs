@@ -26,5 +26,14 @@
 | Admission | Decision that current policy and capacity permit a particular workload |
 | Settlement | Verified accounting/payment outcome under a specified chain mechanism |
 | Source-backed | Supported by a particular source revision, without claiming live deployment |
+| Platform map | The three Autheo surfaces (DevHub, app ecosystem, compute/storage marketplace) inside the THEO economy on the L1; see [platform map](../platform/index.md) |
+| Autheo Labs | The team behind DevHub, the first go-to-market surface |
+| Autheo testnet | EVM chain ID 785 (`0x311`), RPC `testnet-rpc1.autheo.com`; target of the marketplace settlement profile |
+| Placement policy | Marketplace order data that pins which approved nodes may run a deployment; DevHub never falls back to other nodes |
+| Marketplace release | Immutable, publishable version of a DevHub project with declared capabilities; the unit of app distribution |
+| AtomicFeeSplit V2 | Settlement contract that pays provider and fee recipient in one THEO transaction and emits a `Settlement` event |
+| Workflow run | One execution of a durable DevHub workflow; steps, events and hooks are persisted and can be replayed |
+| Browser node | A browser tab donated as a mesh node via `/run-node`; its requests are counted but not billed today |
+| Active CPU | Billing unit that charges only non-idle CPU time |
 
 See [architecture](../concepts/architecture.md), [networks](./networks.md), and [status](./status.md).

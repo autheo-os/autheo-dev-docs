@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>Platform map · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li><li><a aria-current="page" href="index.html">Platform map</a></li><li><a href="journeys.html">Developer journeys</a></li><li><a href="roadmap.html">Roadmap and status</a></li></ul></section><section class="nav-group"><h2>1 · Build: DevHub</h2><ul><li><a href="build.html">Build with DevHub</a></li><li><a href="../devhub/index.html">DevHub (Layer 0)</a></li><li><a href="../devhub/api.html">DevHub API and CLI reference</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../mcp/index.html">Autheo MCP server</a></li><li><a href="../mcp/tools.html">MCP tool reference</a></li><li><a href="../concepts/aos-stack.html">Agent operating stack (AOS)</a></li><li><a href="../concepts/agent-trust.html">Identity and agent trust</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>2 · Ship: app ecosystem</h2><ul><li><a href="app-ecosystem.html">App ecosystem</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li></ul></section><section class="nav-group"><h2>3 · Run: compute &amp; storage</h2><ul><li><a href="compute-marketplace.html">Compute and storage marketplace</a></li><li><a href="developer-usage.html">Developer usage and billing</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>Settle: THEO &amp; L1</h2><ul><li><a href="theo-economy.html">THEO economy</a></li><li><a href="../concepts/theo.html">THEO price feed and markets</a></li><li><a href="l1-networks.html">L1 testnet and mainnet</a></li><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/live-status.html">What is live (dated probes)</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li><li><a href="../reference/faq.html">FAQ</a></li><li><a href="../reference/changelog.html">Documentation changelog</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 42 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="the-autheo-platform-map">The Autheo platform map</h1>
+<p>Autheo is one developer platform with three surfaces, all priced and settled in <strong>THEO</strong> on the <strong>Autheo L1 blockchain</strong>. This page is the map for the rest of the documentation: every section below belongs to one box in the diagram.</p>
+<p><img src="../assets/platform-map.svg" alt="Autheo platform map: DevHub (1) feeds the compute and storage marketplace (3) and the Autheo app ecosystem (2); developer usage connects them; everything sits inside the THEO economy on the Autheo L1 (testnet and mainnet)."></p>
+<p>The numbers are the go-to-market order from the Autheo "go-to-market 1.0" plan: <strong>1</strong> DevHub first, <strong>2</strong> the app ecosystem next, <strong>3</strong> the open compute and storage marketplace third. They are not a ranking of importance.</p>
+<h2 id="the-five-boxes">The five boxes</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>#</th>
+<th>Surface</th>
+<th>What it is for</th>
+<th>Who uses it</th>
+<th>Start here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>DevHub</strong> (Autheo Labs)</td>
+<td>The complete IDE toolkit: deploy, full-stack SDKs, a workflow/DAG engine and the agentic OS</td>
+<td>Application and agent developers</td>
+<td><a href="./build.html">Build with DevHub</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Compute / storage marketplace</strong></td>
+<td>Buy compute and storage capacity from providers, or sell yours</td>
+<td>Developers who need capacity; node operators who supply it</td>
+<td><a href="./compute-marketplace.html">Compute and storage marketplace</a></td>
+</tr>
+<tr>
+<td>—</td>
+<td><strong>Developer usage</strong></td>
+<td>Metering what projects consume and charging for it</td>
+<td>Every paying developer</td>
+<td><a href="./developer-usage.html">Developer usage and billing</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Autheo app ecosystem</strong></td>
+<td>Publish and distribute apps, packaged services and agents built on DevHub</td>
+<td>App publishers and their users</td>
+<td><a href="./app-ecosystem.html">App ecosystem</a></td>
+</tr>
+<tr>
+<td>—</td>
+<td><strong>THEO + L1</strong></td>
+<td>The token that prices everything and the chain that settles it (testnet, mainnet)</td>
+<td>Everyone; integrators and validators directly</td>
+<td><a href="./theo-economy.html">THEO economy</a>, <a href="./l1-networks.html">L1 testnet and mainnet</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-value-moves">How value moves</h2>
+<ol>
+<li>A developer <strong>builds</strong> in DevHub (box 1) and deploys a project.</li>
+<li>The project <strong>runs</strong> on platform capacity or on capacity bought in the compute/storage marketplace (box 3).</li>
+<li>What it consumes is <strong>metered</strong> as developer usage and priced in THEO.</li>
+<li>Finished work is <strong>published</strong> to the app ecosystem (box 2), where others deploy or use it, which in turn creates more usage.</li>
+<li>Payments <strong>settle</strong> in THEO on the Autheo L1. Providers and the platform are paid from the same settlement.</li>
+</ol>
+<h2 id="what-exists-today">What exists today</h2>
+<p>Short version, as of <strong>2026-10-12</strong> (details on the <a href="./roadmap.html">roadmap</a> and <a href="../reference/live-status.html">live status</a> pages):</p>
+<ul>
+<li><strong>Live:</strong> dev.autheo.com (DevHub dashboard behind sign-in, public docs and pricing in THEO), the DevHub API host, the Autheo <strong>testnet</strong> EVM RPC (chain 785) and explorer.</li>
+<li><strong>Built in source, not publicly proven end to end:</strong> DevHub workflows, Marketplace placement and allocation boundary, THEO wallet checkout and testnet settlement profile, browser and self-hosted nodes, GPU inference pooling.</li>
+<li><strong>Planned:</strong> a public app-ecosystem storefront, first-party typed Autheo SDKs, provider payouts at scale, mainnet settlement.</li>
+</ul>
+<p>Every page in this documentation labels claims as <strong>live</strong> (probed on a stated date), <strong>source-backed</strong> (code at a pinned commit), or <strong>planned</strong>. When a page and this map disagree, the more specific page wins.</p>
+<h2 id="choose-your-path">Choose your path</h2>
+<ul>
+<li><strong>I want to ship an app:</strong> <a href="./build.html">Build with DevHub</a> → <a href="../devhub/index.html">DevHub overview</a> → <a href="../devhub/api.html">API and CLI reference</a>.</li>
+<li><strong>I want to build an agent:</strong> <a href="./build.html#_4-agentic-os">Agentic OS in DevHub</a> → <a href="../concepts/aos-stack.html">AOS stack</a> → <a href="../mcp/index.html">Autheo MCP server</a> → <a href="../concepts/agent-trust.html">Identity and agent trust</a>.</li>
+<li><strong>I want to sell compute or storage:</strong> <a href="./compute-marketplace.html">Compute and storage marketplace</a> → <a href="../guides/provider-design.html">Provider preparation</a>.</li>
+<li><strong>I want to publish to the ecosystem:</strong> <a href="./app-ecosystem.html">App ecosystem</a> → <a href="../guides/application-lifecycle.html">Plan an application</a>.</li>
+<li><strong>I integrate with the chain:</strong> <a href="./l1-networks.html">L1 testnet and mainnet</a> → <a href="../reference/networks.html">Network reference</a> → <a href="../guides/integration.html">Integration preparation</a>.</li>
+<li><strong>I want every path side by side:</strong> <a href="./journeys.html">Developer journeys</a>.</li>
+</ul>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="../getting-started/index.html">← Getting started</a><a rel="next" href="journeys.html">Developer journeys →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#the-five-boxes">The five boxes</a></li><li><a href="#how-value-moves">How value moves</a></li><li><a href="#what-exists-today">What exists today</a></li><li><a href="#choose-your-path">Choose your path</a></li></ul></aside></div></body></html>

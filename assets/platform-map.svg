@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="t d" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<title id="t">Autheo platform map</title>
+<desc id="d">Surface 1, DevHub by Autheo Labs (IDE toolkit, full-stack SDKs, workflow and DAG tool, agentic OS), feeds surface 3, the compute and storage marketplace, and surface 2, the Autheo app ecosystem. Developer usage flows from the compute marketplace into the app ecosystem. All of it is priced and settled in THEO on the Autheo L1 blockchain, which has a testnet and a mainnet.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3b5d47"/></marker></defs>
+<rect width="1200" height="560" fill="#ffffff"/>
+<rect x="412" y="40" width="688" height="440" fill="#d3f5df" stroke="#7a9a84"/>
+<text x="756" y="70" text-anchor="middle" font-size="15" fill="#3b5d47">THEO economy (priced and settled in THEO)</text>
+<g fill="#aeeac0" stroke="#4f7a5d">
+<rect x="116" y="190" width="164" height="110"/><rect x="116" y="300" width="164" height="34"/><rect x="116" y="334" width="164" height="72"/><rect x="116" y="406" width="164" height="80"/>
+<rect x="452" y="100" width="164" height="100"/><rect x="452" y="236" width="164" height="70"/><rect x="452" y="342" width="220" height="96"/>
+<rect x="910" y="176" width="190" height="70"/><rect x="910" y="246" width="190" height="64"/><rect x="910" y="310" width="190" height="64"/>
+</g>
+<g fill="#f6c6c6" stroke="#b07070"><rect x="50" y="190" width="66" height="70"/><rect x="616" y="100" width="66" height="70"/><rect x="672" y="362" width="66" height="70"/></g>
+<g font-size="34" text-anchor="middle" fill="#222"><text x="83" y="238">1</text><text x="649" y="148">3</text><text x="705" y="410">2</text></g>
+<g font-size="13" text-anchor="middle" fill="#1d2b22">
+<text x="198" y="222" font-weight="700">DevHub</text><text x="198" y="242">IDE toolkit</text><text x="198" y="262">(Autheo Labs)</text>
+<text x="198" y="322">Full-stack SDKs</text>
+<text x="198" y="364">Workflow /</text><text x="198" y="382">DAG tool</text>
+<text x="198" y="451" font-size="15">Agentic OS</text>
+<text x="534" y="144">Compute / storage</text><text x="534" y="164">marketplace</text>
+<text x="534" y="276">Developer usage</text>
+<text x="562" y="378">Autheo app</text><text x="562" y="398">ecosystem</text><text x="562" y="418">(marketplace)</text>
+<text x="1005" y="216">L1 blockchain</text><text x="1005" y="283">Testnet (785)</text><text x="1005" y="347">Mainnet</text>
+</g>
+<text x="770" y="290" font-size="34" font-weight="700" fill="#1d2b22" text-anchor="middle">$THEO</text>
+<g fill="none" stroke="#3b5d47" stroke-width="1.4">
+<path d="M198 190V150H448" marker-end="url(#a)"/>
+<path d="M534 200V232" marker-end="url(#a)"/>
+<path d="M560 306L580 338" marker-end="url(#a)"/>
+<path d="M280 262H366V390H448" marker-end="url(#a)"/>
+<path d="M280 318H366M280 370H366M280 446H366"/>
+</g>
+<text x="600" y="530" font-size="12" text-anchor="middle" fill="#555">Numbers are the go-to-market order: 1 DevHub, 2 app ecosystem, 3 compute/storage marketplace. Status of each box: see the roadmap page.</text>
+</svg>

@@ -6,6 +6,17 @@ AUTHEO brings together a settlement chain and a design for peer connectivity, di
 This documentation was reviewed on **9 October 2026**. Source-backed does not mean deployment-tested. This site does not certify network availability, platform launch status, security guarantees, or regulatory approval.
 :::
 
+## Start with the platform map
+
+Autheo is one platform with three surfaces priced and settled in THEO on the Autheo L1: **(1) DevHub**, the Autheo Labs IDE toolkit with full-stack SDKs, a workflow/DAG engine and the agentic OS; **(2) the Autheo app ecosystem**; and **(3) the compute and storage marketplace**. The [platform map](./platform/index.md) explains how they connect, the [developer journeys](./platform/journeys.md) give a path per role, and the [roadmap](./platform/roadmap.md) records what is live, source-backed or planned as of 12 October 2026.
+
+| Surface | Read |
+| --- | --- |
+| 1 · Build | [Build with DevHub](./platform/build.md), [DevHub overview](./devhub/index.md), [API and CLI](./devhub/api.md), [MCP server](./mcp/index.md) |
+| 2 · Ship | [App ecosystem](./platform/app-ecosystem.md) |
+| 3 · Run | [Compute and storage marketplace](./platform/compute-marketplace.md), [Developer usage](./platform/developer-usage.md) |
+| Settle | [THEO economy](./platform/theo-economy.md), [L1 testnet and mainnet](./platform/l1-networks.md) |
+
 ## Choose your path
 
 - **New to AUTHEO?** Start with [the orientation](./getting-started/index.md) and [architecture](./concepts/architecture.md).

@@ -21,6 +21,17 @@ This page records what anonymous HTTP requests returned on **2026-10-12 (about 1
 | `https://api.autheo.dev` | No connection (does not resolve), although the live getting-started page names it |
 | `https://autheo.dev` | No connection, although page metadata names it as the organisation URL |
 
+## Autheo L1 testnet (probed about 18:45)
+
+| Endpoint | Result |
+| --- | --- |
+| `https://testnet-rpc1.autheo.com` `eth_chainId` | `0x311` (chain 785) |
+| `https://testnet-rpc1.autheo.com` `eth_blockNumber` | `0x997810` (block 10,057,744) |
+| `https://testnet-explorer.autheo.com` | 200 |
+| `https://marketplace.autheo.dev` | No connection (the production Marketplace URL DevHub defaults to) |
+
+See [L1 testnet and mainnet](../platform/l1-networks.md).
+
 ## Related sites
 
 | Site | Result |
@@ -32,4 +43,4 @@ This page records what anonymous HTTP requests returned on **2026-10-12 (about 1
 
 ## Not checked
 
-Chain RPC/REST endpoints, validator liveness and anything behind sign-in were not tested. The [Autheo MCP](../mcp/index.md) has been verified against local fixtures only.
+Mainnet RPC/REST endpoints, validator liveness and anything behind sign-in were not tested. The [Autheo MCP](../mcp/index.md) has been verified against local fixtures only.

@@ -2,6 +2,12 @@
 
 Changes to this documentation site. Product release notes live in each product repository.
 
+## 2026-10-12 (platform map)
+
+- **New: Platform section** organised around the go-to-market vision: [platform map](../platform/index.md) with diagram, [Build with DevHub](../platform/build.md) (IDE toolkit, full-stack SDKs, workflow/DAG engine, agentic OS), [compute and storage marketplace](../platform/compute-marketplace.md), [developer usage and billing](../platform/developer-usage.md), [app ecosystem](../platform/app-ecosystem.md), [THEO economy](../platform/theo-economy.md), [L1 testnet and mainnet](../platform/l1-networks.md), [developer journeys](../platform/journeys.md) and a [roadmap scorecard](../platform/roadmap.md). Evidence: L0_devhub_deploy `29abc9f`, dev.autheo.com and testnet RPC probes.
+- **Live probe:** Autheo testnet RPC answered `eth_chainId` = `0x311` (785) at block 10,057,744; explorer HTTP 200.
+- **Navigation** regrouped by surface: Build, Run, Ship, Settle. Home, getting started and glossary link into the platform section.
+
 ## 2026-10-12
 
 - **Naming:** DevHub pages use Autheo DevHub / dev.autheo.com throughout and cite autheo-os/L0_devhub_deploy (now synced to `29abc9f`); *shadw* appears only where code identifiers still use it.

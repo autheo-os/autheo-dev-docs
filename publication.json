@@ -13,16 +13,140 @@
         {
           "file": "getting-started/index.md",
           "title": "Getting started"
+        },
+        {
+          "file": "platform/index.md",
+          "title": "Platform map"
+        },
+        {
+          "file": "platform/journeys.md",
+          "title": "Developer journeys"
+        },
+        {
+          "file": "platform/roadmap.md",
+          "title": "Roadmap and status"
+        }
+      ]
+    },
+    {
+      "title": "1 · Build: DevHub",
+      "pages": [
+        {
+          "file": "platform/build.md",
+          "title": "Build with DevHub"
+        },
+        {
+          "file": "devhub/index.md",
+          "title": "DevHub (Layer 0)"
+        },
+        {
+          "file": "devhub/api.md",
+          "title": "DevHub API and CLI reference"
+        },
+        {
+          "file": "components/devhub.md",
+          "title": "DevHub and OpenEdge"
+        },
+        {
+          "file": "mcp/index.md",
+          "title": "Autheo MCP server"
+        },
+        {
+          "file": "mcp/tools.md",
+          "title": "MCP tool reference"
+        },
+        {
+          "file": "concepts/aos-stack.md",
+          "title": "Agent operating stack (AOS)"
+        },
+        {
+          "file": "concepts/agent-trust.md",
+          "title": "Identity and agent trust"
+        },
+        {
+          "file": "components/freddie.md",
+          "title": "Freddie agents"
+        }
+      ]
+    },
+    {
+      "title": "2 · Ship: app ecosystem",
+      "pages": [
+        {
+          "file": "platform/app-ecosystem.md",
+          "title": "App ecosystem"
+        },
+        {
+          "file": "guides/application-lifecycle.md",
+          "title": "Plan an application"
+        }
+      ]
+    },
+    {
+      "title": "3 · Run: compute & storage",
+      "pages": [
+        {
+          "file": "platform/compute-marketplace.md",
+          "title": "Compute and storage marketplace"
+        },
+        {
+          "file": "platform/developer-usage.md",
+          "title": "Developer usage and billing"
+        },
+        {
+          "file": "components/marketplace.md",
+          "title": "Marketplace"
+        },
+        {
+          "file": "components/mesh.md",
+          "title": "L0 Mesh"
+        },
+        {
+          "file": "components/connectivity.md",
+          "title": "Connectivity"
+        },
+        {
+          "file": "guides/provider-design.md",
+          "title": "Provider preparation"
+        }
+      ]
+    },
+    {
+      "title": "Settle: THEO & L1",
+      "pages": [
+        {
+          "file": "platform/theo-economy.md",
+          "title": "THEO economy"
+        },
+        {
+          "file": "concepts/theo.md",
+          "title": "THEO price feed and markets"
+        },
+        {
+          "file": "platform/l1-networks.md",
+          "title": "L1 testnet and mainnet"
+        },
+        {
+          "file": "concepts/architecture.md",
+          "title": "Architecture"
+        },
+        {
+          "file": "reference/networks.md",
+          "title": "Network reference"
+        },
+        {
+          "file": "guides/integration.md",
+          "title": "Integration preparation"
+        },
+        {
+          "file": "guides/node-operator.md",
+          "title": "Node preparation"
         }
       ]
     },
     {
       "title": "Concepts",
       "pages": [
-        {
-          "file": "concepts/architecture.md",
-          "title": "Architecture"
-        },
         {
           "file": "concepts/ecosystem.md",
           "title": "Ecosystem concepts"
@@ -34,90 +158,6 @@
         {
           "file": "concepts/security.md",
           "title": "Security boundaries"
-        },
-        {
-          "file": "concepts/agent-trust.md",
-          "title": "Identity and agent trust"
-        },
-        {
-          "file": "concepts/aos-stack.md",
-          "title": "Agent operating stack (AOS)"
-        },
-        {
-          "file": "concepts/theo.md",
-          "title": "THEO"
-        }
-      ]
-    },
-    {
-      "title": "Ecosystem components",
-      "pages": [
-        {
-          "file": "components/mesh.md",
-          "title": "L0 Mesh"
-        },
-        {
-          "file": "components/connectivity.md",
-          "title": "Connectivity"
-        },
-        {
-          "file": "components/devhub.md",
-          "title": "DevHub and OpenEdge"
-        },
-        {
-          "file": "components/marketplace.md",
-          "title": "Marketplace"
-        },
-        {
-          "file": "components/freddie.md",
-          "title": "Freddie agents"
-        }
-      ]
-    },
-    {
-      "title": "Guides",
-      "pages": [
-        {
-          "file": "guides/integration.md",
-          "title": "Integration preparation"
-        },
-        {
-          "file": "guides/node-operator.md",
-          "title": "Node preparation"
-        },
-        {
-          "file": "guides/application-lifecycle.md",
-          "title": "Plan an application"
-        },
-        {
-          "file": "guides/provider-design.md",
-          "title": "Provider preparation"
-        }
-      ]
-    },
-    {
-      "title": "DevHub (Layer 0)",
-      "pages": [
-        {
-          "file": "devhub/index.md",
-          "title": "DevHub (Layer 0)"
-        },
-        {
-          "file": "devhub/api.md",
-          "title": "DevHub API and CLI reference"
-        }
-      ]
-    },
-    {
-      "title": "MCP server",
-      "pages": [
-        {
-          "file": "mcp/index.md",
-          "title": "Autheo MCP server"
-        },
-        {
-          "file": "mcp/tools.md",
-          "title": "MCP tool reference"
         }
       ]
     },
@@ -127,10 +167,6 @@
         {
           "file": "reference/api.md",
           "title": "API reference"
-        },
-        {
-          "file": "reference/networks.md",
-          "title": "Network reference"
         },
         {
           "file": "reference/status.md",

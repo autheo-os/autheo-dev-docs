@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>Roadmap and status · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li><li><a href="index.html">Platform map</a></li><li><a href="journeys.html">Developer journeys</a></li><li><a aria-current="page" href="roadmap.html">Roadmap and status</a></li></ul></section><section class="nav-group"><h2>1 · Build: DevHub</h2><ul><li><a href="build.html">Build with DevHub</a></li><li><a href="../devhub/index.html">DevHub (Layer 0)</a></li><li><a href="../devhub/api.html">DevHub API and CLI reference</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../mcp/index.html">Autheo MCP server</a></li><li><a href="../mcp/tools.html">MCP tool reference</a></li><li><a href="../concepts/aos-stack.html">Agent operating stack (AOS)</a></li><li><a href="../concepts/agent-trust.html">Identity and agent trust</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>2 · Ship: app ecosystem</h2><ul><li><a href="app-ecosystem.html">App ecosystem</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li></ul></section><section class="nav-group"><h2>3 · Run: compute &amp; storage</h2><ul><li><a href="compute-marketplace.html">Compute and storage marketplace</a></li><li><a href="developer-usage.html">Developer usage and billing</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>Settle: THEO &amp; L1</h2><ul><li><a href="theo-economy.html">THEO economy</a></li><li><a href="../concepts/theo.html">THEO price feed and markets</a></li><li><a href="l1-networks.html">L1 testnet and mainnet</a></li><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/live-status.html">What is live (dated probes)</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li><li><a href="../reference/faq.html">FAQ</a></li><li><a href="../reference/changelog.html">Documentation changelog</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 42 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="go-to-market-roadmap-and-status">Go-to-market roadmap and status</h1>
+<p>This page tracks every box in the <a href="./index.html">platform map</a> against the go-to-market order (1 DevHub, 2 app ecosystem, 3 compute/storage marketplace). It records <strong>evidence</strong>, not promises: "planned" means nobody has shown it working yet, not that it will never ship. Last updated <strong>2026-10-12</strong>.</p>
+<h2 id="scorecard">Scorecard</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Box</th>
+<th>Live (probed)</th>
+<th>Source-backed</th>
+<th>Planned / gaps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 · DevHub IDE toolkit</strong></td>
+<td>dev.autheo.com public site, docs, pricing; dashboard behind sign-in; API host <code>api.shadw.cloud</code></td>
+<td>Deploys, previews, rollback, domains, data, logs, CLI, local node</td>
+<td>Rebrand remaining <em>shadw</em> identifiers; make <code>api.autheo.dev</code> resolve</td>
+</tr>
+<tr>
+<td><strong>1 · Full-stack SDKs</strong></td>
+<td>REST API</td>
+<td>Vercel-compatible TS client, agent-trust Python/JS, MCP server</td>
+<td>First-party typed Autheo SDKs (TS, Python, Rust) under one auth model</td>
+</tr>
+<tr>
+<td><strong>1 · Workflow / DAG tool</strong></td>
+<td><code>/workflows</code> (sign-in)</td>
+<td>Durable runs, graph manifest, replay/cancel/wakeup, console</td>
+<td>Visual DAG editor; agent-authored workflows</td>
+</tr>
+<tr>
+<td><strong>1 · Agentic OS</strong></td>
+<td>—</td>
+<td>JARVIS stack catalog, Autheo MCP (44 tools), agent trust, GPU inference</td>
+<td>Joined agent path: plan → policy → MCP → DevHub → receipt</td>
+</tr>
+<tr>
+<td><strong>2 · App ecosystem</strong></td>
+<td>—</td>
+<td>Immutable releases with capabilities/revocation; game presets; templates</td>
+<td>Public storefront, publisher payouts, review policy</td>
+</tr>
+<tr>
+<td><strong>3 · Compute/storage marketplace</strong></td>
+<td>— (<code>marketplace.autheo.dev</code> unresolved)</td>
+<td>Listings link-out, placement policy v1, private HMAC routes, browser and self-hosted nodes</td>
+<td>Capacity holds, allocation callbacks, usage ingestion, public host</td>
+</tr>
+<tr>
+<td><strong>Developer usage</strong></td>
+<td>Pricing in THEO</td>
+<td>Rate card metering, ledger, THEO wallet checkout</td>
+<td>Metered marketplace usage streams</td>
+</tr>
+<tr>
+<td><strong>THEO</strong></td>
+<td>Display price feed <code>/api/market-reference/theo</code></td>
+<td>Fee-split settlement V2 verification</td>
+<td>Mainnet settlement profile</td>
+</tr>
+<tr>
+<td><strong>L1 testnet</strong></td>
+<td>RPC (chain 785) and explorer answered</td>
+<td>Settlement profile <code>autheo-testnet-v1</code></td>
+<td>Published testnet token/contract addresses, faucet docs</td>
+</tr>
+<tr>
+<td><strong>L1 mainnet</strong></td>
+<td>Not probed</td>
+<td>Published config <code>autheo_2127-1</code></td>
+<td>Verified public RPC/EVM chain ID; settlement on mainnet</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-would-move-each-box-to-live">What would move each box to "live"</h2>
+<ul>
+<li><strong>DevHub:</strong> a public walkthrough (sign-up → deploy → custom domain) recorded against dev.autheo.com, and the CLI published under the Autheo name.</li>
+<li><strong>App ecosystem:</strong> one published release that a second account deploys and pays for in THEO on testnet.</li>
+<li><strong>Marketplace:</strong> one provider listing, one buyer order, a placement-pinned deployment and a verified <code>Settlement</code> event on testnet, all on public hosts.</li>
+<li><strong>Mainnet:</strong> an approved settlement profile, published contract addresses and an audit reference.</li>
+</ul>
+<p>When one of these happens, update this page, the <a href="../reference/live-status.html">live status</a> page and the <a href="../reference/changelog.html">changelog</a> in the same commit.</p>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="journeys.html">← Developer journeys</a><a rel="next" href="build.html">Build with DevHub →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#scorecard">Scorecard</a></li><li><a href="#what-would-move-each-box-to-live">What would move each box to &quot;live&quot;</a></li></ul></aside></div></body></html>

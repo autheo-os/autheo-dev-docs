@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="description" content="Evidence-led AUTHEO documentation: chain references and clearly qualified ecosystem design guides."><title>Compute and storage marketplace · AUTHEO Docs</title><link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../assets/docs.css"><script src="../assets/search-index.js" defer></script><script src="../assets/docs.js" defer></script></head><body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">A</span> AUTHEO <span class="brand-label">/ Documentation</span></a><span class="header-note">Evidence-led guides</span></header><div class="layout"><aside class="sidebar"><details class="navigation" open><summary>Browse documentation</summary><nav aria-label="Documentation"><section class="nav-group"><h2>Start here</h2><ul><li><a href="../index.html">AUTHEO documentation</a></li><li><a href="../getting-started/index.html">Getting started</a></li><li><a href="index.html">Platform map</a></li><li><a href="journeys.html">Developer journeys</a></li><li><a href="roadmap.html">Roadmap and status</a></li></ul></section><section class="nav-group"><h2>1 · Build: DevHub</h2><ul><li><a href="build.html">Build with DevHub</a></li><li><a href="../devhub/index.html">DevHub (Layer 0)</a></li><li><a href="../devhub/api.html">DevHub API and CLI reference</a></li><li><a href="../components/devhub.html">DevHub and OpenEdge</a></li><li><a href="../mcp/index.html">Autheo MCP server</a></li><li><a href="../mcp/tools.html">MCP tool reference</a></li><li><a href="../concepts/aos-stack.html">Agent operating stack (AOS)</a></li><li><a href="../concepts/agent-trust.html">Identity and agent trust</a></li><li><a href="../components/freddie.html">Freddie agents</a></li></ul></section><section class="nav-group"><h2>2 · Ship: app ecosystem</h2><ul><li><a href="app-ecosystem.html">App ecosystem</a></li><li><a href="../guides/application-lifecycle.html">Plan an application</a></li></ul></section><section class="nav-group"><h2>3 · Run: compute &amp; storage</h2><ul><li><a aria-current="page" href="compute-marketplace.html">Compute and storage marketplace</a></li><li><a href="developer-usage.html">Developer usage and billing</a></li><li><a href="../components/marketplace.html">Marketplace</a></li><li><a href="../components/mesh.html">L0 Mesh</a></li><li><a href="../components/connectivity.html">Connectivity</a></li><li><a href="../guides/provider-design.html">Provider preparation</a></li></ul></section><section class="nav-group"><h2>Settle: THEO &amp; L1</h2><ul><li><a href="theo-economy.html">THEO economy</a></li><li><a href="../concepts/theo.html">THEO price feed and markets</a></li><li><a href="l1-networks.html">L1 testnet and mainnet</a></li><li><a href="../concepts/architecture.html">Architecture</a></li><li><a href="../reference/networks.html">Network reference</a></li><li><a href="../guides/integration.html">Integration preparation</a></li><li><a href="../guides/node-operator.html">Node preparation</a></li></ul></section><section class="nav-group"><h2>Concepts</h2><ul><li><a href="../concepts/ecosystem.html">Ecosystem concepts</a></li><li><a href="../concepts/data-flows.html">Data flows and handoffs</a></li><li><a href="../concepts/security.html">Security boundaries</a></li></ul></section><section class="nav-group"><h2>Reference</h2><ul><li><a href="../reference/api.html">API reference</a></li><li><a href="../reference/status.html">Status and support boundaries</a></li><li><a href="../reference/live-status.html">What is live (dated probes)</a></li><li><a href="../reference/sources.html">Sources and verification</a></li><li><a href="../reference/glossary.html">Glossary</a></li><li><a href="../reference/faq.html">FAQ</a></li><li><a href="../reference/changelog.html">Documentation changelog</a></li></ul></section><section class="nav-group"><h2>Maintain and troubleshoot</h2><ul><li><a href="../troubleshooting/index.html">Troubleshooting</a></li><li><a href="../contributing/index.html">Contributing</a></li><li><a href="../deployment/index.html">Standalone deployment</a></li></ul></section></nav></details></aside><div class="reading"><section class="search" aria-label="Search documentation" hidden><label for="docs-search">Search all 42 documents</label><input id="docs-search" type="search" placeholder="Search topics, APIs, networks…" autocomplete="off" aria-controls="search-results" aria-describedby="search-status"><p id="search-status" role="status"></p><ul id="search-results"></ul></section><main id="main" tabindex="-1"><p class="eyebrow">AUTHEO / DEVELOPER DOCUMENTATION</p><article><h1 id="compute-and-storage-marketplace-surface-3">Compute and storage marketplace (surface 3)</h1>
+<p>The marketplace is where capacity is bought and sold: <strong>buyers</strong> (developers) attach compute or storage to a DevHub project, and <strong>providers</strong> (node operators) supply it and get paid in THEO. It is the third go-to-market surface.</p>
+<p>This page documents the integration that exists in DevHub source at commit <code>29abc9f</code> (<a href="https://github.com/autheo-os/L0_devhub_deploy">autheo-os/L0_devhub_deploy</a>). The commercial Marketplace application itself is a separate service; for its intended design (offers, matching, disputes) see <a href="../components/marketplace.html">Marketplace design</a>.</p>
+<h2 id="status-at-a-glance-2026-10-12">Status at a glance (2026-10-12)</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Capability</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Listings by resource type (<code>compute</code>, <code>storage</code>) linked from a DevHub project</td>
+<td><strong>Source-backed</strong></td>
+</tr>
+<tr>
+<td>Placement policy v1: an order pins which nodes may run the workload</td>
+<td><strong>Source-backed</strong></td>
+</tr>
+<tr>
+<td>Private DevHub ↔ Marketplace service routes (HMAC-signed)</td>
+<td><strong>Source-backed</strong></td>
+</tr>
+<tr>
+<td>THEO settlement on Autheo testnet (MarketplaceAtomicFeeSplit V2)</td>
+<td><strong>Source-backed</strong>, enabled only by an explicit profile</td>
+</tr>
+<tr>
+<td>Public Marketplace host</td>
+<td><code>marketplace.autheo.dev</code> did <strong>not resolve</strong> on 2026-10-12; <code>/marketplace</code> on dev.autheo.com redirects to <code>/integrations</code> (sign-in)</td>
+</tr>
+<tr>
+<td>Capacity holds, allocation status callbacks, usage ingestion</td>
+<td><strong>Planned</strong> (deliberately not implemented yet)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-can-be-bought">What can be bought</h2>
+<p>DevHub models two resource types (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/ui/lib/marketplace.ts"><code>ui/lib/marketplace.ts</code></a>):</p>
+<ul>
+<li><strong>compute</strong>: vCPU, memory, disk and execution slots on approved provider nodes; GPU capacity comes from DevHub's GPU pool, grouped by region (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/gpu_pool.rs"><code>gpu_pool.rs</code></a>).</li>
+<li><strong>storage</strong>: capacity for project data. On the platform side, tenant storage operations go through one storage broker that checks ownership, identifier safety, then capacity, in that order (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/storage_broker.rs"><code>storage_broker.rs</code></a>).</li>
+</ul>
+<p>A third listing type, <code>game_hosting</code>, is accepted by the Marketplace but needs a verified provider, an active binding and a healthy DevHub advertisement before it can be quoted. Demo cards are not purchasable capacity (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/docs/marketplace-game-hosting-integration.md"><code>docs/marketplace-game-hosting-integration.md</code></a>).</p>
+<h2 id="buyer-flow-attach-capacity-to-a-project">Buyer flow: attach capacity to a project</h2>
+<ol>
+<li>In a DevHub project, choose <strong>Marketplace</strong> (or <strong>New Project → Deploy from Marketplace</strong>).</li>
+<li>DevHub sends you to <code>{marketplace}/listings?project=…&amp;resource_type=compute|storage&amp;return_url=…</code>.</li>
+<li>You sign in to the Marketplace (its own account flow) and place an order.</li>
+<li>The Marketplace returns you to the project with <code>marketplace_order=&lt;id&gt;</code>; DevHub attaches the order to the project.</li>
+<li>When you deploy with that order, DevHub fetches the order's <strong>placement policy</strong>, validates it, and snapshots it into the deployment. Only the approved nodes may run it.</li>
+</ol>
+<p>Source: <a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/docs/marketplace-project-resources.md"><code>docs/marketplace-project-resources.md</code></a>, <a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/docs/devhub-marketplace-placement-policy.md"><code>docs/devhub-marketplace-placement-policy.md</code></a>.</p>
+<h3 id="placement-policy-v1">Placement policy v1</h3>
+<p>A policy names the order, the buyer tenant, status and revocation state, a validity window, <code>approved_node_ids</code>, provider, listing, region, resources (<code>vcpu</code>, <code>memory_mb</code>, <code>disk_gb</code>) and commercial terms. DevHub rejects it if any of these hold:</p>
+<ul>
+<li>unknown contract or policy version;</li>
+<li>tenant or order mismatch with your signed-in session;</li>
+<li>not <code>active</code>, revoked, or outside its validity window;</li>
+<li>malformed fields, or fields that look like addresses, credentials or control-plane data.</li>
+</ul>
+<p>Approved node IDs are a <strong>hard allowlist</strong>. If none of them is healthy, reachable and has capacity, the deployment fails with <code>MARKETPLACE_PLACEMENT_UNAVAILABLE</code>. DevHub never falls back to an unapproved node.</p>
+<h2 id="provider-flow-supply-capacity">Provider flow: supply capacity</h2>
+<p>There are two ways capacity joins the mesh today:</p>
+<ul>
+<li><strong>Self-hosted nodes:</strong> run the <code>hive-cloud</code> node on your own machines (bare metal, Firecracker microVMs, Macs). Enterprise plans include self-hosted nodes and data residency (<a href="https://dev.autheo.com/pricing">pricing</a>). See <a href="../guides/node-operator.html">node preparation</a> for chain validators and <a href="../guides/provider-design.html">provider preparation</a> for compute providers.</li>
+<li><strong>Browser nodes (<code>/run-node</code>):</strong> a signed-in user can donate a browser tab as a mesh node. It holds a relay identity, can serve browser-eligible functions under strict limits, or replicate a project database (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/ui/lib/run-node-targets.ts"><code>ui/lib/run-node-targets.ts</code></a>). Requests served by browser nodes are counted but <strong>not billed</strong> today.</li>
+</ul>
+<p>Marketplace never becomes a mesh peer: it gets no node keys, relay credentials, tenant workloads or private topology (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/docs/marketplace-l0-routing.md"><code>docs/marketplace-l0-routing.md</code></a>).</p>
+<h2 id="how-the-two-services-talk">How the two services talk</h2>
+<table tabindex="0">
+<thead>
+<tr>
+<th>Direction</th>
+<th>Route</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DevHub → Marketplace</td>
+<td><code>GET /v1/marketplace/orders/{id}/placement-policy</code></td>
+<td>Marketplace session token for the signed-in buyer</td>
+</tr>
+<tr>
+<td>Marketplace → DevHub</td>
+<td><code>GET /v1/marketplace/l0/deployments</code></td>
+<td>Timestamped HMAC with nonce replay protection</td>
+</tr>
+<tr>
+<td>Marketplace → DevHub</td>
+<td><code>POST /v1/marketplace/payment-intents</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Marketplace → DevHub</td>
+<td><code>POST /v1/marketplace/payments/verify</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Marketplace → DevHub</td>
+<td><code>POST /v1/marketplace/l0/allocations</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Marketplace → DevHub</td>
+<td><code>POST /v1/marketplace/workloads</code>, <code>/workload-intents/v2</code></td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<p>Allocations carry settlement and resource facts only, never repository URLs, images or build settings. Workloads attach to an immutable, published <strong>release</strong> of a project (see <a href="./app-ecosystem.html#releases-the-unit-of-distribution">app ecosystem</a>).</p>
+<h2 id="settlement">Settlement</h2>
+<p>Orders are paid in THEO through the MarketplaceAtomicFeeSplit V2 contract: one transaction splits the gross amount between the provider and the platform fee recipient (fee 500 bps = 5%), and emits a <code>Settlement</code> event that DevHub verifies after 2 confirmations. Details: <a href="./theo-economy.html#marketplace-settlement">THEO economy</a>.</p>
+<h2 id="known-gaps">Known gaps</h2>
+<p>From DevHub's own design notes: the four private routes do <strong>not</strong> provide capacity holds, allocation status, callbacks or usage ingestion. Fleet-wide capacity reservation is intentionally unimplemented until a store with conditional writes exists, to avoid selling the last unit twice (<a href="https://github.com/autheo-os/L0_devhub_deploy/blob/29abc9f68731963039a2fbfc3371f0237c93d39e/crates/hive-cloud/src/marketplace_reservations.rs"><code>marketplace_reservations.rs</code></a>). Do not treat a successful allocation as a capacity guarantee.</p>
+<h2 id="next">Next</h2>
+<p><a href="./developer-usage.html">Developer usage and billing</a> · <a href="./theo-economy.html">THEO economy</a> · <a href="../components/marketplace.html">Marketplace design</a></p>
+</article><nav class="page-links" aria-label="Previous and next documents"><a rel="prev" href="../guides/application-lifecycle.html">← Plan an application</a><a rel="next" href="developer-usage.html">Developer usage and billing →</a></nav><footer>Reviewed 9 October 2026 · Source-backed is not live-tested.<br>Verify release and network before use.</footer></main></div><aside class="outline" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#status-at-a-glance-2026-10-12">Status at a glance (2026-10-12)</a></li><li><a href="#what-can-be-bought">What can be bought</a></li><li><a href="#buyer-flow-attach-capacity-to-a-project">Buyer flow: attach capacity to a project</a></li><li><a href="#placement-policy-v1">Placement policy v1</a></li><li><a href="#provider-flow-supply-capacity">Provider flow: supply capacity</a></li><li><a href="#how-the-two-services-talk">How the two services talk</a></li><li><a href="#settlement">Settlement</a></li><li><a href="#known-gaps">Known gaps</a></li><li><a href="#next">Next</a></li></ul></aside></div></body></html>

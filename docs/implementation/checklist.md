@@ -34,6 +34,8 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 - [x] 6. Identity / agent trust (concepts/agent-trust.md): concept (did:key, delegation, revocation), guide (CLI walkthrough), API reference.
 - [x] 7. AOS stack concept (concepts/aos-stack.md; THEO: concepts/theo.md) (JARVIS catalog + autheo-stack narrative); THEO token/market data note (theo-atlas).
 - [~] 8. FAQ + changelog done (reference/faq.md, reference/changelog.md); remaining: security overview, glossary additions, nav/IA regroup; home + getting-started cross-links.
+- [x] 8b. Platform map restructure (2026-10-12): site/platform/{index,build,compute-marketplace,developer-usage,app-ecosystem,theo-economy,l1-networks,journeys,roadmap}.md; nav regrouped Build/Ship/Run/Settle; assets/platform-map.svg; home/getting-started/glossary cross-links with adaptation notes.
+- [ ] 8c. Remaining: security overview page; README page count; per-surface tutorials once live walkthroughs exist.
 - [ ] 9. README/deployment page updates; final full check, CI green, Pages deploy verified live.
 
 ## Log
@@ -43,3 +45,4 @@ commit as SolutionsAsService; small verified pushes to `main`; run `npm run chec
 - 2026-10-12: step 5 DevHub pages (devhub/index.md, generated devhub/api.md: 34 endpoints, 14 shadw commands); CI drift checks for both generators. 27 pages.
 - 2026-10-12: steps 6–7 + FAQ/changelog published; 31 pages, tests 14/14. Next: live-status page (3), THEO note, security/glossary, nav cross-links, Pages deploy check.
 - 2026-10-12 18:3x: live-status + THEO pages; probes: dev.autheo.com public 200, dashboard 307 sign-in, api.shadw.cloud/healthz 200, api.autheo.dev + autheo.dev no connection. Next: security overview, glossary, cross-links (adaptation notes), then autheo-MCP.
+- 2026-10-12 18:5x: platform map section (9 pages, 42 total) aligned to go-to-market 1.0 diagram; testnet RPC probe chain 785 block 10057744; tests 14/14, internal links 0 failures.

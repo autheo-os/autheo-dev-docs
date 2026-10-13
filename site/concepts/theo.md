@@ -25,4 +25,4 @@ The [Autheo MCP server](../mcp/index.md) reads this feed (or an operator-supplie
 
 ## Settlement
 
-Settling DevHub or Marketplace usage in THEO on the Autheo chain is **design only** today; no component sends transactions.
+DevHub source contains THEO settlement verification: plan checkout (exact ERC-20 transfer to a treasury) and Marketplace settlement through the MarketplaceAtomicFeeSplit V2 contract on the Autheo testnet (chain 785). DevHub verifies payments; it never sends or signs them. Mainnet settlement is planned. See [THEO economy](../platform/theo-economy.md).

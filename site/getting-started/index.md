@@ -1,5 +1,9 @@
 # Getting started
 
+::: warning New here?
+Read the [platform map](../platform/index.md) first. It shows the three Autheo surfaces (DevHub, app ecosystem, compute/storage marketplace), the THEO economy and the L1 testnet and mainnet, and links each to its section. The [developer journeys](../platform/journeys.md) give a step-by-step path for app developers, agent builders, providers, publishers and chain integrators.
+:::
+
 ## 1. Identify your task
 
 AUTHEO Chain integration, infrastructure operation, and proposed ecosystem services need different instructions. Begin with [architecture boundaries](../concepts/architecture.md), not an unversioned command copied from a planning document.
@@ -16,6 +20,8 @@ Do not infer an Ethereum JSON-RPC chain ID from a Cosmos chain-ID string. Do not
 | --- | --- | --- |
 | Query or integrate with the chain | [Integration preparation](../guides/integration.md) | Operator-approved endpoint and API family |
 | Run a full node or validator | [Node preparation](../guides/node-operator.md) | Approved release and network configuration |
+| Deploy an app on Autheo DevHub | [Build with DevHub](../platform/build.md) | An account at dev.autheo.com |
+| Test THEO payments or contracts | [L1 testnet and mainnet](../platform/l1-networks.md) | A wallet configured for testnet chain 785 |
 | Understand L0, DevHub, Marketplace, Freddie | [Ecosystem concepts](../concepts/ecosystem.md) | Start with roles and flows; obtain release evidence before execution |
 | Fix a docs problem | [Troubleshooting](../troubleshooting/index.md) | Page URL and non-sensitive error details |
 
